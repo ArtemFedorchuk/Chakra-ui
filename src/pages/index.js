@@ -1,11 +1,7 @@
-import React from 'react'
+import HomePage from '../templates';
+import ErrorPage from '../templates';
 
-const Template = () => {
-  return (
-    <div>
-      <h1>test</h1>
-    </div>
-  )
+export default {
+  HomePage,
+  ErrorPage
 };
-
-export default Template;

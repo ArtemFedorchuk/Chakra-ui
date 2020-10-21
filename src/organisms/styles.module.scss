@@ -1,0 +1,15 @@
+.activeLink {
+	color: tomato;
+}
+
+.menuItem {
+	display: flex;
+	align-items: center;
+	width: 50%;
+
+	p{
+		font-weight: bold;
+		font-size: 18px;
+		padding: 10px;
+	}
+}

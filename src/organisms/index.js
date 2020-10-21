@@ -1,11 +1,5 @@
-import React from 'react'
+import SideBar from './SideBar';
 
-const Template = () => {
-  return (
-    <div>
-      <h1>test</h1>
-    </div>
-  )
+export default {
+  SideBar
 };
-
-export default Template;

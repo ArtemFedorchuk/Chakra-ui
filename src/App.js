@@ -1,24 +1,22 @@
 import React from 'react';
-import logo from './logo.svg';
+import { Route, Switch } from 'react-router-dom';
+import { ThemeProvider } from "@chakra-ui/core";
+import CSSReset from '@chakra-ui/core/dist/CSSReset';
 import './App.css';
+import HomePage from './pages/Home-page';
+import ErrorPage from './pages/Eror-page';
+import customTheme from './theme';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <ThemeProvider theme={customTheme}>
+        <CSSReset />
+        <Switch>
+          <Route path="/home" render={() =>  <HomePage customTheme={customTheme}/>} />
+          <Route render={() => <ErrorPage />} />
+        </Switch>
+      </ThemeProvider>
     </div>
   );
 }
