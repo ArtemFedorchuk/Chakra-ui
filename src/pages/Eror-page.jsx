@@ -1,12 +1,12 @@
 import React from 'react';
-
+import styles from './styles.module.scss'
 
 const ErrorPage = () => {
   return (
    <>
-     <h1 style={{fontSize: '32px', color: 'red', textAlign: 'center', textTransform: 'uppercase'}}>
-       404 not found
-     </h1>
+     <div className={styles.Page404}>
+
+     </div>
    </>
   )
 };
