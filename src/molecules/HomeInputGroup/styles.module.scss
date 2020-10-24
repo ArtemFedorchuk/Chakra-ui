@@ -1,0 +1,27 @@
+.inputGroup {
+	width: 350px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	margin: 40px  auto 0 auto;
+
+	.wrapperInput {
+		display: flex;
+		margin-bottom: 15px;
+
+		.customCheckbox {
+			margin-right: 10px;
+		}
+
+		.customInputDescription {
+			background: #2D3748;
+			border: 1px solid #718096;
+		}
+
+		.customInput {
+			background: transparent;
+			border: 1px solid #718096;
+			color: #718096;
+		}
+	}
+}

@@ -1,5 +1,5 @@
-import Templates from '../templates';
+import HomeTemplate from '../templates';
 
 export default {
-  Templates
+  HomeTemplate
 };

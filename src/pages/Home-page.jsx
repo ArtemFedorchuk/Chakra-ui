@@ -1,10 +1,10 @@
 import React from 'react'
-import Templates from '../templates/Templates';
+import HomeTemplate from '../templates/Home-template/HomeTemplate';
 
 const HomePage = () => {
   return (
     <>
-      <Templates/>
+      <HomeTemplate/>
     </>
   )
 };

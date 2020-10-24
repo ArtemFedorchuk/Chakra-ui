@@ -1,17 +1,20 @@
 import React from 'react'
 import { Grid, Box } from "@chakra-ui/core";
-import SideBar from '../organisms/SideBar';
-import { Graph } from '../molecules/';
 
-const Templates = () => {
+import SideBar from '../../organisms/SideBar';
+import { Graph, ButtonGroup, HomeInputGroup } from '../../molecules';
+
+const HomeTemplate = () => {
   return (
     <Grid templateColumns="repeat(1, 1fr)" gap={6}>
       <SideBar />
       <Box w="100%" h="100vh" bg="">
         <Graph />
+        <ButtonGroup />
+        <HomeInputGroup />
       </Box>
     </Grid>
   )
 };
 
-export default Templates;
+export default HomeTemplate;
