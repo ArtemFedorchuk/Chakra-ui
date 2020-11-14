@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom';
 
-import { Drawer, DrawerBody, DrawerContent, DrawerHeader, DrawerOverlay } from '@chakra-ui/core';
+import { Drawer, DrawerBody, DrawerContent, DrawerFooter, DrawerHeader, DrawerOverlay } from '@chakra-ui/core';
 import useDisclosure from '@chakra-ui/core/dist/useDisclosure';
 import Box from '@chakra-ui/core/dist/Box';
 import IconButton from '@chakra-ui/core/dist/IconButton';
@@ -51,6 +51,15 @@ const SideBar = () => {
                 </p>
               </NavLink>
           </DrawerBody>
+
+          <DrawerFooter>
+            <NavLink to="/" activeClassName={styles.activeLink}>
+              <p className={styles.menuItem}>
+                <Box as={BsGearFill} size="22px" color="white" />
+                <p>LogOut</p>
+              </p>
+            </NavLink>
+          </DrawerFooter>
         </DrawerContent>
       </Drawer>
     </>

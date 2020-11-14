@@ -1,7 +1,33 @@
 .Page404 {
+	position: relative;
 	width:100vw;
 	height: 100vh;
 	background: rgba(217, 30, 24, .5) url('../assets/images/pages-bg/404-page.png') no-repeat;
 	background-size: 20%;
 	background-position: center center;
+
+	h1 {
+		position: absolute;
+		top: 60px;
+		left: 50%;
+		transform: translateX(-50%);
+		text-transform: uppercase;
+		font-weight: 500;
+		font-size: 40px;
+	}
+
+	.link {
+		position: absolute;
+		bottom: 60px;
+		left: 50%;
+		transform: translateX(-50%);
+		text-decoration: underline;
+		font-size: 20px;
+		transition: .25s ease;
+		font-weight: 500;
+
+		&:hover {
+			color: navajowhite;
+		}
+	}
 }

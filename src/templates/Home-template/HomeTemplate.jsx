@@ -1,7 +1,7 @@
 import React from 'react'
 import { Grid, Box } from "@chakra-ui/core";
 
-import SideBar from '../../organisms/SideBar';
+import SideBar from '../../organisms/Side-bar/SideBar';
 import { Graph, ButtonGroup, HomeInputGroup } from '../../molecules';
 
 const HomeTemplate = () => {

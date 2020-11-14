@@ -6,6 +6,7 @@ import './App.css';
 import HomePage from './pages/Home-page';
 import ErrorPage from './pages/Eror-page';
 import customTheme from './theme';
+import SignIn from './organisms/SignIn';
 
 function App() {
   return (
@@ -13,8 +14,9 @@ function App() {
       <ThemeProvider theme={customTheme}>
         <CSSReset />
         <Switch>
-          <Route path="/home" render={() =>  <HomePage customTheme={customTheme}/>} />
-          <Route render={() => <ErrorPage />} />
+          <Route exact path="/" render={ () => <SignIn theme={customTheme}/>} />
+          <Route path="/home" render={ () =>  <HomePage theme={customTheme}/>} />
+          <Route render={ () => <ErrorPage />} />
         </Switch>
       </ThemeProvider>
     </div>

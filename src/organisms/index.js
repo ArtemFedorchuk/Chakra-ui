@@ -1,5 +1,7 @@
-import SideBar from './SideBar';
+import SideBar from './Side-bar/SideBar';
+import SignIn from './SignIn';
 
 export default {
-  SideBar
+  SideBar,
+  SignIn
 };
