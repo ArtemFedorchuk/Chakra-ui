@@ -1,24 +1,21 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { ThemeProvider } from "@chakra-ui/core";
-import CSSReset from '@chakra-ui/core/dist/CSSReset';
 import './App.css';
 import HomePage from './pages/Home-page';
 import ErrorPage from './pages/Eror-page';
-import customTheme from './theme';
 import SignIn from './organisms/SignIn';
+import ThemeContext from './contexts/theme/ThemeContext';
 
 function App() {
   return (
     <div className="App">
-      <ThemeProvider theme={customTheme}>
-        <CSSReset />
+      <ThemeContext>
         <Switch>
-          <Route exact path="/" render={ () => <SignIn theme={customTheme}/>} />
-          <Route path="/home" render={ () =>  <HomePage theme={customTheme}/>} />
+          <Route exact path="/" render={ () => <SignIn/>} />
+          <Route path="/home" render={ () =>  <HomePage/>} />
           <Route render={ () => <ErrorPage />} />
         </Switch>
-      </ThemeProvider>
+      </ThemeContext>
     </div>
   );
 }

@@ -281,9 +281,9 @@ const customTheme = {
   },
   breakpoints: ["30em", "48em", "62em", "80em"],
   fonts: {
-    body: "system-ui, sans-serif",
-    heading: "Georgia, serif",
-    mono: "Menlo, monospace",
+    heading: `-apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"`,
+    body: `-apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"`,
+    mono: `SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace`,
   },
   fontSizes: {
     xs: "12px",
@@ -298,9 +298,15 @@ const customTheme = {
     "6xl": "64px",
   },
   fontWeights: {
+    hairline: 100,
+    thin: 200,
+    light: 300,
     normal: 400,
     medium: 500,
+    semibold: 600,
     bold: 700,
+    extrabold: 800,
+    black: 900,
   },
   lineHeights: {
     normal: "normal",
