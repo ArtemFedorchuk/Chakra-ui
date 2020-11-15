@@ -27,6 +27,7 @@ const obj = [
 ];
 
 const HomeInputGroup = () => {
+  // eslint-disable-next-line no-unused-vars
   const [ text, setText ] = useState('');
   const { data, setValues } = useData();
 

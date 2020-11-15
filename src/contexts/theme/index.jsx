@@ -5,7 +5,7 @@ import { ThemeProvider as EmotionThemeProvider } from 'emotion-theming';
 
 import  customTheme  from '../../styles/theme'
 
-const ThemeContext = ({ children }) => {
+const Index = ({ children }) => {
   return (
     <ChakraThemeProvider theme={customTheme}>
       <ColorModeProvider value='dark'>
@@ -18,4 +18,4 @@ const ThemeContext = ({ children }) => {
   )
 };
 
-export default ThemeContext;
+export default Index;

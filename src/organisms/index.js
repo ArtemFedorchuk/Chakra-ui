@@ -1,4 +1,4 @@
-import SideBar from './Side-bar/SideBar';
+import SideBar from './Side-bar';
 import SignIn from './SignIn';
 
 export default {

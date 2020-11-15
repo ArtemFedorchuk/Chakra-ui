@@ -4,7 +4,7 @@ import './App.css';
 import HomePage from './pages/Home-page';
 import ErrorPage from './pages/Eror-page';
 import SignIn from './organisms/SignIn';
-import ThemeContext from './contexts/theme/ThemeContext';
+import { ThemeContext } from './contexts/';
 
 function App() {
   return (
