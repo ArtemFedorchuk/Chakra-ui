@@ -29,10 +29,11 @@ const obj = [
 const HomeInputGroup = () => {
   // eslint-disable-next-line no-unused-vars
   const [ text, setText ] = useState('');
+  // eslint-disable-next-line no-unused-vars
   const { data, setValues } = useData();
 
   // console.log('text ->', text );
-  console.log('data ->', data );
+  // console.log('data ->', data );
 
   const changeHandler = (e) => {
     setText(e.target.value);

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
 import Stack from '@chakra-ui/core/dist/Stack';
@@ -12,10 +12,12 @@ import { HiAtSymbol } from "react-icons/hi";
 import styles from './styles.module.scss';
 import Text from '@chakra-ui/core/dist/Text';
 
-const SignIn = () => {
+const LogIn = () => {
   const [ login, setLogin ] = useState();
   const [ password, setPassword ] = useState();
   const [show, setShow] = React.useState(false);
+  const [sendInfo, setSendInfo ] = useState(false);
+
   const handleShow = () => setShow(!show);
   const history = useHistory();
 
@@ -33,28 +35,39 @@ const SignIn = () => {
   };
 
   const sendHandler = () => {
-    localStorage.setItem('user', JSON.stringify(userObj));
-
-    if( login === 'admin@.com' && password === 'admin123') {
-      history.push('/home')
-    }
-
+    // localStorage.setItem('user', JSON.stringify(userObj));
+    //
+    // if( login === 'admin@.com' && password === 'admin123') {
+    //   history.push('/home')
+    // }
+    setSendInfo(true)
   };
 
   const clearHandler = () => {
     localStorage.clear()
   };
 
-  // eslint-disable-next-line no-unused-vars
-  const handlerHome = () => {
-    history.push('/home')
-  };
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      console.log('user send');
+      localStorage.setItem('user', JSON.stringify(userObj));
+
+      if( userObj.login === 'admin@.com' && userObj.password === 'admin123') {
+        history.push('/home')
+      }
+      else {
+      setSendInfo(false)
+      }
+    }, 3000);
+
+    return () => clearTimeout(timer)
+  }, [sendInfo, userObj, history]);
 
   return (
       <div className={styles.formWrapper}>
         <Stack spacing={3}>
           <Text fontSize="3xl">
-            Sign In
+            Log In to CRYP TOOL
           </Text>
         </Stack>
         <form action='' className={styles.form}>
@@ -94,7 +107,19 @@ const SignIn = () => {
           </Stack>
             <br/>
           <div className={styles.btnGroup}>
-            <button onClick={sendHandler} type="button" className={styles.button}>Sign In</button>
+            {sendInfo ? (
+              <Button
+                isLoading
+                loadingText="Submitting"
+                colorScheme="pink"
+                variant="outline"
+                variantColor='teal.500'
+              >
+                Submit
+              </Button>
+            ) : (
+              <button onClick={sendHandler} type="button" className={styles.button}>Sign In</button>
+            )}
             <button onClick={clearHandler} className={styles.button}>clear</button>
             <br/>
           </div>
@@ -111,4 +136,4 @@ const SignIn = () => {
   )
 };
 
-export default SignIn;
+export default LogIn;

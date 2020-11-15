@@ -1,4 +1,5 @@
 import React, { useReducer } from 'react';
+
 import Button from '@chakra-ui/core/dist/Button';
 
 import { GiFlame, GiInterdiction } from "react-icons/gi";
@@ -25,6 +26,11 @@ const ButtonGroup = () => {
   };
 
   const [ state, dispatch ] = useReducer(reducer, {count: 0});
+
+  const getUser = () => {
+    const user = localStorage.getItem('user');
+    console.log( 'user -> ',user );
+  };
 
   const increment = () => {
     dispatch({type: ACTIONS.INCREMENT})
@@ -64,6 +70,9 @@ const ButtonGroup = () => {
       >
         Stop
       </Button>
+      <button onClick={getUser}>
+        get user info
+      </button>
 
       <h1>{state.count}</h1>
     </div>

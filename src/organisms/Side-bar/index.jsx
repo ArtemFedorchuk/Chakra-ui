@@ -1,5 +1,5 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom';
+import React from 'react';
+import { NavLink, useHistory } from 'react-router-dom';
 
 import { Drawer, DrawerBody, DrawerContent, DrawerFooter, DrawerHeader, DrawerOverlay } from '@chakra-ui/core';
 import useDisclosure from '@chakra-ui/core/dist/useDisclosure';
@@ -13,6 +13,12 @@ import Grid from '@chakra-ui/core/dist/Grid';
 const SideBar = () => {
 
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const history = useHistory();
+
+  const logoutHandler = () => {
+    localStorage.clear();
+    history.push('/')
+  };
 
   return (
     <>
@@ -53,12 +59,9 @@ const SideBar = () => {
           </DrawerBody>
 
           <DrawerFooter>
-            <NavLink to="/" activeClassName={styles.activeLink}>
-              <p className={styles.menuItem}>
-                <Box as={BsGearFill} size="22px" color="white" />
+            <div className={styles.logout} onClick={logoutHandler}>
                 <p>LogOut</p>
-              </p>
-            </NavLink>
+            </div>
           </DrawerFooter>
         </DrawerContent>
       </Drawer>

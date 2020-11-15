@@ -13,3 +13,14 @@
 		padding: 10px;
 	}
 }
+
+.logout {
+	color: white;
+	width: 100%;
+	cursor: pointer;
+	transition: .25s ease;
+
+	&:hover {
+		color: tomato;
+	}
+}
