@@ -35,7 +35,7 @@ const SideBar = () => {
       </Grid>
       <Drawer placement="right" bg="orange" onClose={onClose} isOpen={isOpen} >
         <DrawerOverlay />
-        <DrawerContent bg="teal.900">
+        <DrawerContent bg="gray.800">
           <DrawerHeader borderBottomWidth="1px">Menu</DrawerHeader>
           <DrawerBody>
             <NavLink to="/home" activeClassName={styles.activeLink}>

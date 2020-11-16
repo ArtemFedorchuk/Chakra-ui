@@ -48,26 +48,27 @@ const LogIn = () => {
   };
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      console.log('user send');
-      localStorage.setItem('user', JSON.stringify(userObj));
+      if( userObj.login === 'admin@.com' && userObj.password === 'admin123' && sendInfo) {
+        localStorage.setItem('user', JSON.stringify(userObj));
+        localStorage.setItem('auth', 'true');
+        history.push('/home');
 
-      if( userObj.login === 'admin@.com' && userObj.password === 'admin123') {
-        history.push('/home')
+
+        const timer = setTimeout(() => {
+          // history.push('/home');
+          return () => clearTimeout(timer)
+        }, 3000);
       }
       else {
       setSendInfo(false)
       }
-    }, 3000);
-
-    return () => clearTimeout(timer)
   }, [sendInfo, userObj, history]);
 
   return (
       <div className={styles.formWrapper}>
         <Stack spacing={3}>
           <Text fontSize="3xl">
-            Log In to CRYP TOOL
+            Log In to CRYPT TOOL
           </Text>
         </Stack>
         <form action='' className={styles.form}>
@@ -109,6 +110,7 @@ const LogIn = () => {
           <div className={styles.btnGroup}>
             {sendInfo ? (
               <Button
+                className={styles.buttonSpinner}
                 isLoading
                 loadingText="Submitting"
                 colorScheme="pink"
@@ -119,13 +121,14 @@ const LogIn = () => {
               </Button>
             ) : (
               <button onClick={sendHandler} type="button" className={styles.button}>Sign In</button>
-            )}
+
+              )}
             <button onClick={clearHandler} className={styles.button}>clear</button>
             <br/>
           </div>
         </form>
         <div className={styles.linkWrapper}>
-          <Link to='/register' className={styles.link}>
+          <Link to='/sign-up' className={styles.link}>
             Register
           </Link>
           <Link to='/forgot-password' className={styles.link}>
