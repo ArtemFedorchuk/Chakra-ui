@@ -10,6 +10,7 @@ import {
 import Stack from '@chakra-ui/core/dist/Stack';
 
 import styles from './styles.module.scss'
+import { useData } from '../../DataContext';
 
 const obj = [
   {
@@ -46,42 +47,70 @@ const obj = [
 
 const HomeInputGroup = () => {
 
+  const { data, setValues } = useData();
+
+  console.log('data ->', data );
+
   //inputs change
   const [ walletVolumeNumber, setWalletVolumeNumber ] = useState(0);
+  // eslint-disable-next-line no-unused-vars
   const [ takerCommissionNumber, setTakerCommissionNumber ] = useState(0);
+  // eslint-disable-next-line no-unused-vars
   const [ takerUsdNumber, setTakerUsdNumber ] = useState(0);
+  // eslint-disable-next-line no-unused-vars
   const [ stopLossNumber, setStopLossNumber ] = useState(0);
+  // eslint-disable-next-line no-unused-vars
   const [ buyNextNumber, setBuyNextNumber ] = useState(0);
 
   console.log('walletVolumeNumber ->', walletVolumeNumber );
-  console.log('takerCommissionNumber ->', takerCommissionNumber );
-  console.log('takerUsdNumber ->', takerUsdNumber );
-  console.log('stopLossNumber ->', stopLossNumber );
-  console.log('buyNextNumber ->', buyNextNumber );
+  // console.log('takerCommissionNumber ->', takerCommissionNumber );
+  // console.log('takerUsdNumber ->', takerUsdNumber );
+  // console.log('stopLossNumber ->', stopLossNumber );
+  // console.log('buyNextNumber ->', buyNextNumber );
 
   const changeInput = (e) => {
     switch (e.target.id) {
       case '1' : {
-       return setWalletVolumeNumber(e.target.value)
+       setWalletVolumeNumber(e.target.value);
+       setValues({
+         volumeNumber: Number(e.target.value)
+       });
+       return
       }
       case '2' : {
-       return setTakerCommissionNumber(e.target.value)
+       setTakerCommissionNumber(e.target.value);
+        setValues({
+          takerCommissionNumber: Number(e.target.value)
+        });
+        return
       }
       case '3' : {
-       return setTakerUsdNumber(e.target.value)
+       setTakerUsdNumber(e.target.value);
+        setValues({
+          takerUsdNumber: Number(e.target.value)
+        });
+        return
       }
       case '4' : {
-       return setStopLossNumber(e.target.value)
+       setStopLossNumber(e.target.value);
+        setValues({
+          stopLossNumber: Number(e.target.value)
+        });
+        return
       }
       case '5' : {
-       return setBuyNextNumber(e.target.value)
+       setBuyNextNumber(e.target.value);
+        setValues({
+          buyNextNumber: Number(e.target.value)
+        });
+        return
       }
 
       default: {
         return e.target.value
       }
     }
-  }
+  };
 
   return (
       <Stack shouldWrapChildren direction="row">
@@ -93,7 +122,7 @@ const HomeInputGroup = () => {
                 </h6>
               </div>
               <div>
-                <NumberInput defaultValue={0} size="sm"  min={item.minValue}>
+                <NumberInput isDisabled={false} defaultValue={0} size="sm"  min={item.minValue}>
                   <NumberInputField
                     placeholder="0"
                     id={item.id}
