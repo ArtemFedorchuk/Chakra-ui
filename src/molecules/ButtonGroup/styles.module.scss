@@ -6,4 +6,15 @@
 	.btnStart {
 		margin-right: 40px;
 	}
+	.buttonStop {
+		margin-left: 40px;
+		border-color: brown;
+		border-width: 2px;
+		color: brown;
+
+		&:hover {
+			color: #C05621;
+			border-color: #C05621;
+		}
+	}
 }

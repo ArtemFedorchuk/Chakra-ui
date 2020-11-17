@@ -1,0 +1,31 @@
+.contentWrapper {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  margin-top: 30px;
+
+  .leftContent {
+    width: 67%;
+
+    .currentGroupWrapper {
+      margin-top: 30px;
+    }
+
+    .inputGroupWrapper {
+      margin-top: 50px;
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+  .rightContent {
+    padding: 10px 5px 10px 5px;
+    width: 30%;
+    background: #2D3748;
+    border-radius: 5px;
+  }
+
+  .counterWrapper {
+    margin: 0 auto;
+  }
+}

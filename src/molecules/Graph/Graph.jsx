@@ -6,7 +6,7 @@ import styles from './styles.module.scss'
 const Graph = () => {
 
   const data = {
-    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'test'],
     type: 'line',
     datasets: [
       {
@@ -23,7 +23,7 @@ const Graph = () => {
         pointHoverBorderWidth: 2,
         pointRadius: 3,
         pointHitRadius: 10,
-        data: [65, 59, 80, 81, 56, 55, 40]
+        data: [15, 59, 80, 81, 56, 55, 40, 67]
       },
       {
         label: '2 BTC',
@@ -37,7 +37,7 @@ const Graph = () => {
         pointHoverBorderWidth: 2,
         pointRadius: 3,
         pointHitRadius: 10,
-        data: [33, 67, 50, 77, 53, 140, 21],
+        data: [33, 67, 50, 77, 45, 110, 21, 5],
 
       }
     ],
@@ -47,8 +47,8 @@ const Graph = () => {
     <Line
       data={data}
       className={styles.graph}
-      height="20vh"
-      width="70vh"
+      height="15vh"
+      width="85vh"
     />
   )
 };

@@ -1,19 +1,38 @@
 import React from 'react'
-import { Grid, Box } from "@chakra-ui/core";
 
-import SideBar from '../../organisms/Side-bar';
-import { Graph, ButtonGroup, HomeInputGroup } from '../../molecules';
+import { SideBar, MessageBox } from '../../organisms/';
+
+import {
+  Graph,
+  ButtonGroup,
+  HomeInputGroup,
+  CounterGroup,
+  CurrentGroup
+} from '../../molecules';
+
+import styles from './styles.module.scss'
 
 const HomeTemplate = () => {
   return (
-    <Grid templateColumns="repeat(1, 1fr)" gap={6}>
+    <div>
       <SideBar />
-      <Box w="100%" h="100vh" bg="">
-        <Graph />
-        <ButtonGroup />
-        <HomeInputGroup />
-      </Box>
-    </Grid>
+      <Graph />
+      <div className={styles.contentWrapper}>
+        <div className={styles.leftContent}>
+          <CounterGroup />
+          <div className={styles.currentGroupWrapper}>
+            <CurrentGroup />
+          </div>
+          <div className={styles.inputGroupWrapper}>
+            <HomeInputGroup />
+          </div>
+          <ButtonGroup />
+        </div>
+        <div className={styles.rightContent}>
+          <MessageBox />
+        </div>
+      </div>
+    </div>
   )
 };
 

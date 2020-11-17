@@ -1,69 +1,114 @@
 import React, { useState } from 'react';
-import { InputLeftAddon } from '@chakra-ui/core';
+import {
+  NumberDecrementStepper,
+  NumberIncrementStepper,
+  NumberInput,
+  NumberInputField,
+  NumberInputStepper
+} from '@chakra-ui/core';
+
 import Stack from '@chakra-ui/core/dist/Stack';
-import Input from '@chakra-ui/core/dist/Input';
-import InputGroup from '@chakra-ui/core/dist/InputGroup';
-import Checkbox from '@chakra-ui/core/dist/Checkbox';
 
 import styles from './styles.module.scss'
-import { useData } from '../../DataContext';
 
 const obj = [
   {
     id: 1,
-    childrenName: 'Sec',
-    placeholder: 'Seconds'
+    label: 'Wallet volume in %',
+    defaultValue: '0',
+    minValue: '0'
   },
   {
     id: 2,
-    childrenName: 'Min',
-    placeholder: 'Minutes'
+    label: 'Taker commission in %',
+    defaultValue: '0',
+    minValue: '0'
   },
   {
     id: 3,
-    childrenName: 'Hou',
-    placeholder: 'Hours'
+    label: 'Taker USD for Safety zone',
+    defaultValue: '0',
+    minValue: '0'
+  },
+  {
+    id: 4,
+    label: 'Stop loss',
+    defaultValue: '0',
+    minValue: '0'
+  },
+  {
+    id: 5,
+    label: 'Buy next in percentage',
+    defaultValue: '0',
+    minValue: '0'
   },
 ];
 
 const HomeInputGroup = () => {
-  // eslint-disable-next-line no-unused-vars
-  const [ text, setText ] = useState('');
-  // eslint-disable-next-line no-unused-vars
-  const { data, setValues } = useData();
 
-  // console.log('text ->', text );
-  // console.log('data ->', data );
+  //inputs change
+  const [ walletVolumeNumber, setWalletVolumeNumber ] = useState(0);
+  const [ takerCommissionNumber, setTakerCommissionNumber ] = useState(0);
+  const [ takerUsdNumber, setTakerUsdNumber ] = useState(0);
+  const [ stopLossNumber, setStopLossNumber ] = useState(0);
+  const [ buyNextNumber, setBuyNextNumber ] = useState(0);
 
-  const changeHandler = (e) => {
-    setText(e.target.value);
-    setValues(e.target.value);
-  };
+  console.log('walletVolumeNumber ->', walletVolumeNumber );
+  console.log('takerCommissionNumber ->', takerCommissionNumber );
+  console.log('takerUsdNumber ->', takerUsdNumber );
+  console.log('stopLossNumber ->', stopLossNumber );
+  console.log('buyNextNumber ->', buyNextNumber );
+
+  const changeInput = (e) => {
+    switch (e.target.id) {
+      case '1' : {
+       return setWalletVolumeNumber(e.target.value)
+      }
+      case '2' : {
+       return setTakerCommissionNumber(e.target.value)
+      }
+      case '3' : {
+       return setTakerUsdNumber(e.target.value)
+      }
+      case '4' : {
+       return setStopLossNumber(e.target.value)
+      }
+      case '5' : {
+       return setBuyNextNumber(e.target.value)
+      }
+
+      default: {
+        return e.target.value
+      }
+    }
+  }
 
   return (
-    <div className={styles.inputGroup}>
-        <Stack spacing={4}>
+      <Stack shouldWrapChildren direction="row">
           {obj.map((item) => (
-            <div className={styles.wrapperInput} key={item.id}>
-              <InputGroup>
-                <Checkbox variantColor="green" className={styles.customCheckbox} />
-                <InputLeftAddon
-                  className={styles.customInputDescription}
-                  children={item.childrenName}
-                />
-                <Input
-                  onChange={changeHandler}
-                  className={styles.customInput}
-                  type="number"
-                  focusBorderColor="pink.400"
-                  roundedLeft="0"
-                  placeholder={item.placeholder}
-                />
-              </InputGroup>
+            <div key={item.id} className={styles.inputItem}>
+              <div>
+                <h6>
+                  {item.label}
+                </h6>
+              </div>
+              <div>
+                <NumberInput defaultValue={0} size="sm"  min={item.minValue}>
+                  <NumberInputField
+                    placeholder="0"
+                    id={item.id}
+                    onChange={changeInput}
+                    onBlur={changeInput}
+                  />
+                  <NumberInputStepper>
+                    <NumberIncrementStepper />
+                    <NumberDecrementStepper />
+                  </NumberInputStepper>
+                </NumberInput>
+              </div>
             </div>
           ))}
-        </Stack>
-    </div>
+      </Stack>
   )
 };
 

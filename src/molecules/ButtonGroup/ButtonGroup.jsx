@@ -25,8 +25,10 @@ const ButtonGroup = () => {
     }
   };
 
+  // eslint-disable-next-line no-unused-vars
   const [ state, dispatch ] = useReducer(reducer, {count: 0});
 
+  // eslint-disable-next-line no-unused-vars
   const getUser = () => {
     const user = localStorage.getItem('user');
     console.log( 'user -> ',user );
@@ -38,7 +40,7 @@ const ButtonGroup = () => {
 
   const decrement = () => {
     dispatch({type: ACTIONS.DECREMENT})
-    };
+  };
 
   return (
     <div className={styles.buttonGroup}>
@@ -70,11 +72,19 @@ const ButtonGroup = () => {
       >
         Stop
       </Button>
-      <button onClick={getUser}>
-        get user info
-      </button>
 
-      <h1>{state.count}</h1>
+      <Button
+        className={styles.buttonStop}
+        size="md"
+        height="48px"
+        width="200px"
+        variant="outline"
+        leftIcon={ GiInterdiction }
+        _hover={{ bg: "rgba(0,0,0, .1)" }}
+      >
+        Sell now & off
+      </Button>
+
     </div>
   )
 };

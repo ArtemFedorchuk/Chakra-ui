@@ -1,0 +1,26 @@
+.wrapperCounter {
+  border: 1px solid #718096;
+  border-radius: 5px;
+  padding: 0 0;
+
+  .firstCurrentItem {
+    padding: 4px 0;
+    border-right: 1px solid #718096;
+  }
+  
+  .secondCurrentItem  {
+    border-right: 1px solid #718096;
+    padding: 4px 0;
+  }
+
+  .threeCurrentItem {
+    height: 100%;
+    padding: 4px 0;
+  }
+
+  .lastCounter {
+    padding: 4px 0;
+    border-left: 1px solid #718096;
+    //background: #00A3C4;
+  }
+}

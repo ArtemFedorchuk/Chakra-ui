@@ -1,0 +1,23 @@
+.wrapperCounter {
+  border: 1px solid #718096;
+  border-radius: 5px;
+  padding: 0 0;
+
+  .firstCounter {
+    background: #6B46C1;
+    padding: 7px 0;
+  }
+  
+  .centerCounter {
+    background: #C53030;
+    border-right: 1px solid #718096;
+    border-left: 1px solid #718096;
+    padding: 7px 0;
+
+  }
+
+  .lastCounter {
+    padding: 7px 0;
+    //background: #00A3C4;
+  }
+}

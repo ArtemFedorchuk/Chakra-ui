@@ -3,7 +3,7 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import './App.css';
 import HomePage from './pages/Home-page';
 import ErrorPage from './pages/Eror-page';
-import LogIn from './organisms/LogIn';
+import { LogIn } from './organisms/';
 import { ThemeContext } from './contexts/';
 
 function App() {
