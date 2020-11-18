@@ -47,8 +47,8 @@ const Graph = () => {
     <Line
       data={data}
       className={styles.graph}
-      height="15vh"
-      width="85vh"
+      height={20}
+      width={80}
     />
   )
 };
