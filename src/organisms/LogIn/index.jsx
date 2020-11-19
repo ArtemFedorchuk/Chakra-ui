@@ -123,7 +123,7 @@ const LogIn = () => {
         </form>
         <div className={styles.linkWrapper}>
           <Link to='/registration' className={styles.link}>
-            Register
+            Registration
           </Link>
           <Link to='/forgot-password' className={styles.link}>
             Forgot password

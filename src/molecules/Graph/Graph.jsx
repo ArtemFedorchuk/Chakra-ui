@@ -255,7 +255,7 @@ const Graph = () => {
         height: 350
       },
       title: {
-        text: 'CandleStick Chart',
+        text: 'Crypto Toll',
         align: 'left'
       },
       xaxis: {
