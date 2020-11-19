@@ -1,32 +1,34 @@
-import React, { useReducer } from 'react';
+import React from 'react';
 
 import Button from '@chakra-ui/core/dist/Button';
 
 import { GiFlame, GiInterdiction } from "react-icons/gi";
 
 import styles from './styles.module.scss'
-
-const ACTIONS = {
-  INCREMENT: 'increment',
-  DECREMENT: 'decrement'
-};
+import {useMainButtonData} from '../../contexts/main-button-context/MainButtonContext';
 
 const ButtonGroup = () => {
+  const { dataButton, setButtonValues } = useMainButtonData()
 
-  const reducer = (state, action) => {
-    switch(action.type) {
-      case ACTIONS.INCREMENT:
-        return {count: state.count + 1};
-      case ACTIONS.DECREMENT:
-        return {count: state.count - 1};
-      default:
-        return state
+  console.log('dataButton -> ', dataButton)
 
-    }
-  };
+  const startHandler = () => {
+    setButtonValues({
+      startButton: true
+    })
+  }
 
-  // eslint-disable-next-line no-unused-vars
-  const [ state, dispatch ] = useReducer(reducer, {count: 0});
+  const stopHandler = () => {
+    setButtonValues({
+      startButton: false
+    })
+  }
+
+  const sellOffHandler = () => {
+    setButtonValues({
+      sellOffButton: true
+    })
+  }
 
   // eslint-disable-next-line no-unused-vars
   const getUser = () => {
@@ -34,18 +36,11 @@ const ButtonGroup = () => {
     console.log( 'user -> ',user );
   };
 
-  const increment = () => {
-    dispatch({type: ACTIONS.INCREMENT})
-    };
-
-  const decrement = () => {
-    dispatch({type: ACTIONS.DECREMENT})
-  };
-
   return (
     <div className={styles.buttonGroup}>
       <Button
-        onClick={increment}
+        onClick={startHandler}
+        isDisabled={dataButton.startButton}
         variantColor="blue"
         size="md"
         height="48px"
@@ -60,7 +55,7 @@ const ButtonGroup = () => {
       </Button>
 
       <Button
-        onClick={decrement}
+        onClick={stopHandler}
         variantColor="red"
         size="md"
         height="48px"
@@ -74,6 +69,7 @@ const ButtonGroup = () => {
       </Button>
 
       <Button
+        onClick={sellOffHandler}
         className={styles.buttonStop}
         size="md"
         height="48px"

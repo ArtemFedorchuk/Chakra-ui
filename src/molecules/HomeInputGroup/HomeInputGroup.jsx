@@ -10,7 +10,8 @@ import {
 import Stack from '@chakra-ui/core/dist/Stack';
 
 import styles from './styles.module.scss'
-import { useData } from '../../DataContext';
+import { useInputData } from '../../contexts/data-input-context/DataInputContext';
+import {useMainButtonData} from '../../contexts/main-button-context/MainButtonContext';
 
 const obj = [
   {
@@ -47,11 +48,15 @@ const obj = [
 
 const HomeInputGroup = () => {
 
-  const { data, setValues } = useData();
+  // eslint-disable-next-line no-unused-vars
+  const { data, setValues } = useInputData();
+  const { dataButton } = useMainButtonData()
+
 
   console.log('data ->', data );
 
   //inputs change
+  // eslint-disable-next-line no-unused-vars
   const [ walletVolumeNumber, setWalletVolumeNumber ] = useState(0);
   // eslint-disable-next-line no-unused-vars
   const [ takerCommissionNumber, setTakerCommissionNumber ] = useState(0);
@@ -62,7 +67,7 @@ const HomeInputGroup = () => {
   // eslint-disable-next-line no-unused-vars
   const [ buyNextNumber, setBuyNextNumber ] = useState(0);
 
-  console.log('walletVolumeNumber ->', walletVolumeNumber );
+  // console.log('walletVolumeNumber ->', walletVolumeNumber );
   // console.log('takerCommissionNumber ->', takerCommissionNumber );
   // console.log('takerUsdNumber ->', takerUsdNumber );
   // console.log('stopLossNumber ->', stopLossNumber );
@@ -122,7 +127,15 @@ const HomeInputGroup = () => {
                 </h6>
               </div>
               <div>
-                <NumberInput isDisabled={false} defaultValue={0} size="sm"  min={item.minValue}>
+                <NumberInput
+                  isDisabled={
+                    dataButton.startButton ? true :
+                    dataButton.stopButton ? false : false
+                  }
+                  defaultValue={0}
+                  size="sm"
+                  min={item.minValue}
+                >
                   <NumberInputField
                     placeholder="0"
                     id={item.id}

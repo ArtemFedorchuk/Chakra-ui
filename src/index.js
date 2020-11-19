@@ -5,14 +5,18 @@ import { BrowserRouter} from 'react-router-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { DataProvider } from './DataContext';
+
+import { DataInputProvider } from './contexts/data-input-context/DataInputContext';
+import { DataMainButtonProvider } from './contexts/main-button-context/MainButtonContext';
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <DataProvider>
-        <App />
-      </DataProvider>
+      <DataMainButtonProvider>
+        <DataInputProvider>
+          <App />
+        </DataInputProvider>
+      </DataMainButtonProvider>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
