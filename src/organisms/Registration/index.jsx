@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import Stack from '@chakra-ui/core/dist/Stack';
 import InputGroup from '@chakra-ui/core/dist/InputGroup';
@@ -12,59 +12,21 @@ import { HiAtSymbol } from "react-icons/hi";
 import styles from './styles.module.scss';
 import Text from '@chakra-ui/core/dist/Text';
 
-const LogIn = () => {
-  const [ login, setLogin ] = useState();
-  const [ password, setPassword ] = useState();
+const Registration = () => {
   const [show, setShow] = React.useState(false);
   const [sendInfo, setSendInfo ] = useState(false);
 
   const handleShow = () => setShow(!show);
-  const history = useHistory();
-
-  const loginHandler = (e) => {
-    setLogin(e.target.value)
-  };
-
-  const passwordHandler = (e) => {
-    setPassword(e.target.value)
-  };
-
-  const userObj = {
-    login: `${login}`,
-    password: `${password}`
-  };
 
   const sendHandler = () => {
-    // localStorage.setItem('user', JSON.stringify(userObj));
-    //
-    // if( login === 'admin@.com' && password === 'admin123') {
-    //   history.push('/home')
-    // }
     setSendInfo(true)
   };
-
-  useEffect(() => {
-      if( userObj.login === 'admin@.com' && userObj.password === 'admin123' && sendInfo) {
-        localStorage.setItem('user', JSON.stringify(userObj));
-        localStorage.setItem('auth', 'true');
-        history.push('/home');
-
-
-        const timer = setTimeout(() => {
-          // history.push('/home');
-          return () => clearTimeout(timer)
-        }, 3000);
-      }
-      else {
-      setSendInfo(false)
-      }
-  }, [sendInfo, userObj, history]);
 
   return (
       <div className={styles.formWrapper}>
         <Stack spacing={3}>
           <Text fontSize="3xl">
-            Log In to CRYPT TOOL
+            REGISTRATION CRYPT TOOL
           </Text>
         </Stack>
         <form action='' className={styles.form}>
@@ -75,9 +37,8 @@ const LogIn = () => {
                 children={<HiAtSymbol color="gray.300" />}
               />
               <Input
-                type="phone"
+                type="email"
                 placeholder="Email"
-                onChange={loginHandler}
                 focusBorderColor="#2C7A7B"
               />
             </InputGroup>
@@ -87,7 +48,6 @@ const LogIn = () => {
                 className={styles.input}
                 pr="4.5rem"
                 type={show ? "text" : "password"}
-                onChange={passwordHandler}
                 placeholder="Enter password"
                 focusBorderColor="#2C7A7B"
               />
@@ -116,14 +76,14 @@ const LogIn = () => {
                 Submit
               </Button>
             ) : (
-              <button onClick={sendHandler} type="button" className={styles.button}>Sign In</button>
-
+              <button onClick={sendHandler} type="button" className={styles.button}>Registration</button>
               )}
           </div>
         </form>
+
         <div className={styles.linkWrapper}>
-          <Link to='/registration' className={styles.link}>
-            Register
+          <Link to='/' className={styles.link}>
+            LogIn
           </Link>
           <Link to='/forgot-password' className={styles.link}>
             Forgot password
@@ -133,4 +93,4 @@ const LogIn = () => {
   )
 };
 
-export default LogIn;
+export default Registration;

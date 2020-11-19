@@ -1,0 +1,52 @@
+.formWrapper {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate( -50%, -50%);
+	box-shadow: 0 0 8px #171923;
+
+	width: 400px;
+	height: auto;
+	display: flex;
+	flex-direction: column;
+	padding: 50px 20px 20px 20px;
+	background: #2D3748;
+	color: white;
+	margin: 0 auto;
+	text-align: center;
+	border-radius: 5px;
+	
+	.form {
+		padding: 40px 0;
+
+		.btnGroup {
+			display: flex;
+			flex-direction: column;
+			.button {
+				background: #319795;
+				padding: 10px 0;
+				border-radius: 5px;
+				margin: 10px 0;
+				text-transform: uppercase;
+				font-size: 14px;
+				transition: .25s ease;
+
+				&:hover {
+					background: #2C7A7B;
+				}
+			}
+			.buttonSpinner {
+				margin-bottom: 10px;
+			}
+		}
+	}
+
+	.linkWrapper {
+		display: flex;
+		justify-content: space-around;
+
+		.link {
+			color: #38B2AC;
+		}
+	}
+}
