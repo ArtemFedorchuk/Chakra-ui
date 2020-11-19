@@ -1,7 +1,6 @@
 import React from 'react';
 import Chart from 'react-apexcharts'
 
-// import { Bar } from 'react-chartjs-2';
 // import styles from './styles.module.scss'
 
 const Graph = () => {

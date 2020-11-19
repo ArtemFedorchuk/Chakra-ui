@@ -23,10 +23,10 @@ const SideBar = () => {
   return (
     <>
       <Grid templateColumns="repeat(4, 1fr)" gap={1}>
-        <Box w="20%" h="auto">
+        <Box w="5%" h="auto">
           <IconButton
             onClick={onOpen}
-            variantColor="red"
+            variantColor="blue"
             aria-label="Open menu"
             icon={BsLayoutSidebarReverse}
             size="lg"
