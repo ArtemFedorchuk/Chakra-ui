@@ -3,24 +3,30 @@ import styles from './styles.module.scss'
 
 const messages = [
   {
-    id: 5,
+    id: 6,
     sell: true,
     profit: -94.27,
     sellPrice: 16969.72,
     time: '2:12:40 PM'
   },
   {
-    id: 4,
+    id: 5,
     buy: true,
     price: 16961.70,
     time: '2:12:32 PM'
   },
   {
-    id: 3,
+    id: 4,
     sell: true,
     profit: -44.27,
     sellPrice: 16969.72,
     time: '2:12:40 PM'
+  },
+  {
+    id: 3,
+    buy: true,
+    price: 16961.70,
+    time: '2:12:32 PM'
   },
   {
     id: 2,
@@ -35,7 +41,6 @@ const messages = [
     price: 16451.1,
     time: '2:12:33 PM'
   },
-
 ]
 
 const MessageBox = () => {
