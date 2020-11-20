@@ -1,34 +1,36 @@
 import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import './App.css';
-import HomePage from './pages/Home-page';
-import ErrorPage from './pages/Eror-page';
-import { LogIn, ForgotPassword, Registration } from './organisms/';
+import {
+  ErrorPage,
+  HomePage,
+  SettingsPage,
+  LoginPage,
+  ForgotPasswordPage,
+  RegistrationPage
+} from './pages';
+
 import { ThemeContext } from './contexts/';
+import {useAuthData} from './contexts/auth-context/authContext';
 
 function App() {
+  const { dataAuth } = useAuthData()
   const auth = localStorage.getItem('auth');
 
   const protectedRoute = (Component) => {
-    if (auth === 'true') {
-      return Component
-    }
-    else {
-     return <Redirect to="/" />
-    }
+    return auth && dataAuth.auth ? Component : (<Redirect to="/" />)
   };
 
   return (
     <div className="App">
       <ThemeContext>
         <Switch>
-          <Route exact path="/" render={ () => <LogIn/>} />
-          <Route path="/sign-in" render={ () => <LogIn/>} />
-          <Route path="/registration" render={ () => <Registration/>} />
-          <Route path="/forgot-password" render={ () => <ForgotPassword/>} />
-          <Route path="/sign-up" render={ () => <h1>SignUpPage</h1>} />
-          <Route path="/reset-password" render={ () => <h1>ResetPasswordPage</h1>} />
+          <Route exact path="/" render={ () => <LoginPage/>} />
+          <Route path="/sign-in" render={ () => <LoginPage/>} />
+          <Route path="/registration" render={ () => <RegistrationPage/>} />
+          <Route path="/forgot-password" render={ () => <ForgotPasswordPage/>} />
           {protectedRoute(<Route path="/home" render={ () =>  <HomePage/>} />)}
+          {protectedRoute(<Route path="/settings" render={ () =>  <SettingsPage/>} />)}
           <Route render={ () => <ErrorPage />} />
         </Switch>
       </ThemeContext>

@@ -7,7 +7,7 @@
 	align-items: center;
 	width: 50%;
 
-	p{
+	span{
 		font-weight: bold;
 		font-size: 18px;
 		padding: 10px;
@@ -15,12 +15,19 @@
 }
 
 .logout {
-	color: white;
 	width: 100%;
+	color: white;
 	cursor: pointer;
 	transition: .25s ease;
+	font-size: 18px;
+	padding: 5px 25px;
+	background: #9B2C2C;
+	text-align: center;
+	border-radius: 5px;
+	border: 2px solid #9B2C2C;
 
 	&:hover {
-		color: tomato;
+		background: transparent;
+		color: #9B2C2C;
 	}
 }

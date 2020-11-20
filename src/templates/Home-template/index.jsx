@@ -14,7 +14,7 @@ import styles from './styles.module.scss'
 
 const HomeTemplate = () => {
   return (
-    <div>
+    <>
       <SideBar />
       <Graph />
       <div className={styles.contentWrapper}>
@@ -32,7 +32,7 @@ const HomeTemplate = () => {
           <MessageBox />
         </div>
       </div>
-    </div>
+    </>
   )
 };
 

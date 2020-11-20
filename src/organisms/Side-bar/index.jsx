@@ -36,31 +36,31 @@ const SideBar = () => {
       <Drawer placement="right" bg="orange" onClose={onClose} isOpen={isOpen} >
         <DrawerOverlay />
         <DrawerContent bg="gray.800">
-          <DrawerHeader borderBottomWidth="1px">Menu</DrawerHeader>
+          <DrawerHeader borderBottomWidth="1px">CRYPTO TOOL</DrawerHeader>
           <DrawerBody>
             <NavLink to="/home" activeClassName={styles.activeLink}>
               <p className={styles.menuItem}>
                 <Box as={BsFillHouseFill} size="22px" color="white" />
-                <p>Home</p>
+                <span>Home</span>
               </p>
             </NavLink>
             <NavLink to="/main" activeClassName={styles.activeLink}>
               <p className={styles.menuItem}>
                 <Box as={ BsGraphUp } size="22px" color="white" />
-                <p>Main</p>
+                <span>Main</span>
               </p>
             </NavLink>
               <NavLink to="/settings" activeClassName={styles.activeLink}>
                 <p className={styles.menuItem}>
                   <Box as={BsGearFill} size="22px" color="white" />
-                  <p>Settings</p>
+                  <span>Settings</span>
                 </p>
               </NavLink>
           </DrawerBody>
 
           <DrawerFooter>
             <div className={styles.logout} onClick={logoutHandler}>
-                <p>LogOut</p>
+                <span>LogOut</span>
             </div>
           </DrawerFooter>
         </DrawerContent>

@@ -8,15 +8,21 @@ import * as serviceWorker from './serviceWorker';
 
 import { DataInputProvider } from './contexts/data-input-context/DataInputContext';
 import { DataMainButtonProvider } from './contexts/main-button-context/MainButtonContext';
+import { DataSettingsProvider } from './contexts/settings-context/SettingsContext';
+import {DataAuthProvider} from './contexts/auth-context/authContext';
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <DataMainButtonProvider>
-        <DataInputProvider>
-          <App />
-        </DataInputProvider>
-      </DataMainButtonProvider>
+      <DataAuthProvider>
+        <DataMainButtonProvider>
+          <DataSettingsProvider>
+            <DataInputProvider>
+              <App />
+            </DataInputProvider>
+          </DataSettingsProvider>
+        </DataMainButtonProvider>
+      </DataAuthProvider>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')

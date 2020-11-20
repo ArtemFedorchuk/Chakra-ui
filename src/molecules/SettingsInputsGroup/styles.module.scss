@@ -1,0 +1,31 @@
+.settingsInputsWrapper {
+  margin-top: 80px;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+
+  .settingInputItem {
+    text-align: left;
+    width: 500px;
+    margin-bottom: 20px;
+
+    .inputSettingItem {
+      border-color: #718096;
+
+      &:focus {
+        border-color: #00A3C4;
+      }
+    }
+
+    .inputSettingItemError {
+      border-color: #E53E3E;
+      border-width: 2px;
+    }
+  }
+
+  .saveButton {
+    border-color: #00A3C4;
+    color: #00A3C4;
+    margin-top: 20px;
+  }
+}
