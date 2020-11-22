@@ -18,7 +18,7 @@ function App() {
   const auth = localStorage.getItem('auth');
 
   const protectedRoute = (Component) => {
-    return auth && dataAuth.auth ? Component : (<Redirect to="/" />)
+    return auth || dataAuth.auth ? Component : (<Redirect to="/" />)
   };
 
   return (

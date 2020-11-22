@@ -276,13 +276,6 @@ const Graph = () => {
       type="candlestick"
       height={350}
     />
-  // <Bar
-    //   data={data}
-    //   className={styles.graph}
-    //   height={20}
-    //   width={80}
-    //   options={{ candleStick: true }}
-    // />
   )
 };
 

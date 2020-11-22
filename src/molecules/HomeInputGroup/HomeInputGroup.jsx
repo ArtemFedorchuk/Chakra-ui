@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
+import {useStore} from 'effector-react'
+
 import {
   NumberDecrementStepper,
   NumberIncrementStepper,
@@ -9,9 +11,17 @@ import {
 
 import Stack from '@chakra-ui/core/dist/Stack';
 
+import {
+  buyNextEvent,
+  mainButtonStateStore,
+  stopLossEvent,
+  takerCommissionEvent,
+  takerUsdEvent,
+  walletEvent
+} from '../../store';
+
 import styles from './styles.module.scss'
-import { useInputData } from '../../contexts/data-input-context/DataInputContext';
-import {useMainButtonData} from '../../contexts/main-button-context/MainButtonContext';
+
 
 const obj = [
   {
@@ -48,67 +58,27 @@ const obj = [
 
 const HomeInputGroup = () => {
 
-  // eslint-disable-next-line no-unused-vars
-  const { data, setValues } = useInputData();
-  const { dataButton } = useMainButtonData()
+  const stateMainButtons = useStore(mainButtonStateStore);
 
+  console.log( 'inputs state-> ', stateMainButtons );
 
-  console.log('data ->', data );
-
-  //inputs change
-  // eslint-disable-next-line no-unused-vars
-  const [ walletVolumeNumber, setWalletVolumeNumber ] = useState(0);
-  // eslint-disable-next-line no-unused-vars
-  const [ takerCommissionNumber, setTakerCommissionNumber ] = useState(0);
-  // eslint-disable-next-line no-unused-vars
-  const [ takerUsdNumber, setTakerUsdNumber ] = useState(0);
-  // eslint-disable-next-line no-unused-vars
-  const [ stopLossNumber, setStopLossNumber ] = useState(0);
-  // eslint-disable-next-line no-unused-vars
-  const [ buyNextNumber, setBuyNextNumber ] = useState(0);
-
-  // console.log('walletVolumeNumber ->', walletVolumeNumber );
-  // console.log('takerCommissionNumber ->', takerCommissionNumber );
-  // console.log('takerUsdNumber ->', takerUsdNumber );
-  // console.log('stopLossNumber ->', stopLossNumber );
-  // console.log('buyNextNumber ->', buyNextNumber );
 
   const changeInput = (e) => {
     switch (e.target.id) {
       case '1' : {
-       setWalletVolumeNumber(e.target.value);
-       setValues({
-         volumeNumber: Number(e.target.value)
-       });
-       return
+        return walletEvent(e.target.value);
       }
       case '2' : {
-       setTakerCommissionNumber(e.target.value);
-        setValues({
-          takerCommissionNumber: Number(e.target.value)
-        });
-        return
+        return takerCommissionEvent(e.target.value);
       }
       case '3' : {
-       setTakerUsdNumber(e.target.value);
-        setValues({
-          takerUsdNumber: Number(e.target.value)
-        });
-        return
+        return takerUsdEvent(e.target.value);
       }
       case '4' : {
-       setStopLossNumber(e.target.value);
-        setValues({
-          stopLossNumber: Number(e.target.value)
-        });
-        return
+        return stopLossEvent(e.target.value);
       }
       case '5' : {
-       setBuyNextNumber(e.target.value);
-        setValues({
-          buyNextNumber: Number(e.target.value)
-        });
-        return
+        return buyNextEvent(e.target.value);
       }
 
       default: {
@@ -129,8 +99,7 @@ const HomeInputGroup = () => {
               <div>
                 <NumberInput
                   isDisabled={
-                    dataButton.startButton ? true :
-                    dataButton.stopButton ? false : false
+                    stateMainButtons.startButton
                   }
                   defaultValue={0}
                   size="sm"

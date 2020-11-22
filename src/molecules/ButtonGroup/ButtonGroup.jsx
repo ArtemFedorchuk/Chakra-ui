@@ -6,29 +6,24 @@ import { GiFlame, GiInterdiction } from "react-icons/gi";
 
 import styles from './styles.module.scss'
 import {useMainButtonData} from '../../contexts/main-button-context/MainButtonContext';
+import { useStore } from 'effector-react';
+import { inputValueStore, mainButtonStateStore, sellOffEvent, startEvent, stopEvent } from '../../store';
 
 const ButtonGroup = () => {
-  const { dataButton, setButtonValues } = useMainButtonData()
-
-  console.log('dataButton -> ', dataButton)
+  const stateMainButtons = useStore(mainButtonStateStore);
 
   const startHandler = () => {
-    setButtonValues({
-      startButton: true
-    })
-  }
+    startEvent(true);
+  };
 
   const stopHandler = () => {
-    setButtonValues({
-      startButton: false
-    })
-  }
+    startEvent(false);
+    stopEvent(false);
+  };
 
   const sellOffHandler = () => {
-    setButtonValues({
-      sellOffButton: true
-    })
-  }
+    sellOffEvent(true);
+  };
 
   // eslint-disable-next-line no-unused-vars
   const getUser = () => {
@@ -40,7 +35,7 @@ const ButtonGroup = () => {
     <div className={styles.buttonGroup}>
       <Button
         onClick={startHandler}
-        isDisabled={dataButton.startButton}
+        isDisabled={stateMainButtons.startButton}
         variantColor="blue"
         size="md"
         height="48px"

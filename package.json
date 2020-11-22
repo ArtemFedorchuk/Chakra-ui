@@ -7,6 +7,7 @@
     "@emotion/styled": "^10.0.27",
     "apexcharts": "^3.22.2",
     "chart.js": "^2.9.4",
+    "effector-react": "^21.0.8",
     "emotion-theming": "^10.0.27",
     "eslint-plugin-import": "^2.22.1",
     "history": "^4.10.1",
@@ -17,7 +18,8 @@
     "react-dom": "^16.14.0",
     "react-icons": "^3.11.0",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.3"
+    "react-scripts": "3.4.3",
+    "socket.io-client": "^3.0.3"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -41,6 +43,7 @@
     ]
   },
   "devDependencies": {
-    "@chakra-ui/core": "^0.8.0"
+    "@chakra-ui/core": "^0.8.0",
+    "effector": "^21.7.2"
   }
 }
