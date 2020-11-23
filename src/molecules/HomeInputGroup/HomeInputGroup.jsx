@@ -60,7 +60,7 @@ const HomeInputGroup = () => {
 
   const stateMainButtons = useStore(mainButtonStateStore);
 
-  console.log( 'inputs state-> ', stateMainButtons );
+  // console.log( 'stateMainButtons -> ', stateMainButtons );
 
 
   const changeInput = (e) => {

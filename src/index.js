@@ -11,6 +11,8 @@ import { DataMainButtonProvider } from './contexts/main-button-context/MainButto
 import { DataSettingsProvider } from './contexts/settings-context/SettingsContext';
 import {DataAuthProvider} from './contexts/auth-context/authContext';
 
+import './client/client-socket'
+
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>

@@ -13,7 +13,11 @@ import {
 import { ThemeContext } from './contexts/';
 import {useAuthData} from './contexts/auth-context/authContext';
 
+// import { ReactTool } from './client/client-socket.jsx'
+
 function App() {
+  // ReactTool()
+
   const { dataAuth } = useAuthData()
   const auth = localStorage.getItem('auth');
 
