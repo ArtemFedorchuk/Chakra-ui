@@ -1,17 +1,19 @@
 import React, {useState} from 'react';
 import {Alert, AlertIcon} from '@chakra-ui/core';
 import {startEvent,stopEvent,sellOffEvent} from '../../store';
+import CloseButton from '@chakra-ui/core/dist/CloseButton';
 
 const StatusBlock = () => {
-  const [ status, setStatus ] = useState(null)
-  const [ show, setShow ] = useState(false)
+  const [ status, setStatus ] = useState(null);
+  const [ show, setShow ] = useState(false);
 
   startEvent.watch(() => {
-    setShow(true)
+    setShow(true);
     setStatus(true)
-  })
-  stopEvent.watch(() => setStatus(false))
-  sellOffEvent.watch(() => setStatus(false))
+  });
+
+  stopEvent.watch(() => setStatus(false));
+  sellOffEvent.watch(() => setStatus(false));
   return (
     <>
       {show && (
@@ -21,12 +23,22 @@ const StatusBlock = () => {
               <Alert status="success" variant="subtle">
                 <AlertIcon />
                 Start Crypto tool!
+                <div onClick={() => setShow(false)}>
+                  <CloseButton position="absolute" right="8px" top="8px" />
+                </div>
               </Alert>
             </div>
           ): (
             <Alert status="error">
               <AlertIcon />
               STOPPED Crypto tool!
+              <div onClick={() => setShow(false)}>
+                <CloseButton
+                  position="absolute"
+                  right="8px"
+                  top="8px"
+                />
+              </div>
             </Alert>
           )}
         </>
