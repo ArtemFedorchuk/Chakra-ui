@@ -1,35 +1,92 @@
-import { io } from 'socket.io-client';
-// import {useStore} from 'effector-react';
-import {startEvent} from '../store';
+import React, {useEffect} from 'react';
+import {io} from 'socket.io-client';
+import {useStore} from 'effector-react';
+import {inputValueStore, sellOffEvent, startEvent, stopEvent} from '../store';
 
-const socket = io('http://localhost:3001', { forceNew: true });
-// const stateMainButtonsStore = useStore(mainButtonStateStore);
-// const inputsStore = useStore(inputValueStore);
-//
-// const {startButton, stopButton, sellOffButton} = stateMainButtonsStore
-// const {walletVolumeNumber, takerCommissionNumber, takerUsdNumber, stopLossNumber, buyNextNumber} = inputsStore
+const socket = io('http://localhost:3001');
 
-//const objInputsData
+
+const SocketClient = () => {
+  const inputStore = useStore(inputValueStore)
+  const {walletVolumeNumber,takerCommissionNumber,takerUsdNumber,stopLossNumber,buyNextNumber} = inputStore;
+
 //START BUTTON
-startEvent.watch(() => {
-  console.log('Start....')
-  socket.on('connect', () => {
-    console.log(socket.connected); // true
-  });
-  console.log('Socket connected ', socket.connected)
+  useEffect(() => {
+    startEvent.watch(() => {
+      console.log('Start....');
+      // socket.on('connect', (res) => {
+      //   console.log(socket);
+      // });
 
-  // socket.emit('binanceApp', {
-  //   'status': true,
-  //   // 'taker': takerCommissionNumber,
-  //   // 'walletVolume': parseFloat(walletVolumeNumber),
-  //   // 'buyNext': parseFloat(buyNextNumber),
-  //   // 'takerUsd': parseFloat(takerUsdNumber),
-  //   // 'loss': parseFloat(stopLossNumber)
-  // });
-  //
-  // socket.on('binanceApp', (response) => console.log('response socket -> ', response));
+      socket.emit('binanceApp', {
+        'status': true,
+        'taker': takerCommissionNumber,
+        'walletVolume': parseFloat(walletVolumeNumber),
+        'buyNext': parseFloat(buyNextNumber),
+        'takerUsd': parseFloat(takerUsdNumber),
+        'loss': parseFloat(stopLossNumber)
+      });
+    })
+  }, [takerCommissionNumber,walletVolumeNumber,buyNextNumber,takerUsdNumber,stopLossNumber])
 
-})
+  //STOP BUTTON
+  useEffect(() => {
+    stopEvent.watch(() => {
+      console.log('Stop...')
+      socket.emit('binanceApp', {
+        'status': false,
+      });
+    })
+
+  },[])
+
+  // BUTTON EXTRA STOP
+  useEffect(() => {
+    sellOffEvent.watch(() => {
+      console.log('EXTRA Stop...')
+      socket.emit('binanceApp', {
+        'extraExit': true
+      });
+    })
+  }, [])
+
+
+  socket.on('binanceApp', (response) => {
+    console.log ('response => ', response)
+  if (response.action) {
+    if (response.action === 'Buy') {
+      // blockSellNowButton(false);
+      // let buyElement = generateLiElement(response);
+      // collection.appendChild(buyElement);
+    }
+    else if (response.action === 'Sell') {
+      // blockSellNowButton(true);
+      // let sellElement = generateLiElement(response);
+      // collection.appendChild(sellElement);
+      if (response.profit) {
+        // countProfits(response.profit);
+      }
+    }
+  }
+  if (response.price && response.prevPrice) {
+    // changePriceOnMonitor(response);
+  }
+  if (response.stopPrice || response.nextBuyAt) {
+    // changeStopLossOrNextBuyOnMonitor(response);
+  }
+  if (response.safetyLine) {
+    // showSafetyLine(response.safetyLine);
+  } else {
+    // showSafetyLine(0);
+  }
+});
+
+  return(
+    <></>
+  )
+}
+
+export default SocketClient
 
 
 // -------------- Old logic -------------------

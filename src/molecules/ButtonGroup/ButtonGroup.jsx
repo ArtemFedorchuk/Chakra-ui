@@ -1,29 +1,16 @@
-import React from 'react';
-
+import React, {useState} from 'react';
 import Button from '@chakra-ui/core/dist/Button';
-
 import { GiFlame, GiInterdiction } from "react-icons/gi";
+import { sellOffEvent, startEvent, stopEvent } from '../../store';
 
 import styles from './styles.module.scss'
-import {useMainButtonData} from '../../contexts/main-button-context/MainButtonContext';
-import { useStore } from 'effector-react';
-import { inputValueStore, mainButtonStateStore, sellOffEvent, startEvent, stopEvent } from '../../store';
 
 const ButtonGroup = () => {
-  const stateMainButtons = useStore(mainButtonStateStore);
+  const [ disabled, setDisabled ] = useState(false)
 
-  const startHandler = () => {
-    startEvent(true);
-  };
-
-  const stopHandler = () => {
-    startEvent(false);
-    stopEvent(false);
-  };
-
-  const sellOffHandler = () => {
-    sellOffEvent(true);
-  };
+  startEvent.watch(() => setDisabled(true));
+  stopEvent.watch(() => setDisabled(false));
+  sellOffEvent.watch(() => setDisabled(false));
 
   // eslint-disable-next-line no-unused-vars
   const getUser = () => {
@@ -34,8 +21,8 @@ const ButtonGroup = () => {
   return (
     <div className={styles.buttonGroup}>
       <Button
-        onClick={startHandler}
-        isDisabled={stateMainButtons.startButton}
+        onClick={() => startEvent(true)}
+        isDisabled={disabled}
         variantColor="blue"
         size="md"
         height="48px"
@@ -50,7 +37,7 @@ const ButtonGroup = () => {
       </Button>
 
       <Button
-        onClick={stopHandler}
+        onClick={() => stopEvent(false)}
         variantColor="red"
         size="md"
         height="48px"
@@ -64,7 +51,7 @@ const ButtonGroup = () => {
       </Button>
 
       <Button
-        onClick={sellOffHandler}
+        onClick={() => sellOffEvent(true)}
         className={styles.buttonStop}
         size="md"
         height="48px"

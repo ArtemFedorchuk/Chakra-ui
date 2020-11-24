@@ -45,6 +45,5 @@
   "devDependencies": {
     "@chakra-ui/core": "^0.8.0",
     "effector": "^21.7.2"
-  },
-  "proxy": "http://localhost:3001"
+  }
 }

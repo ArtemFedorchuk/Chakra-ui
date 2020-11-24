@@ -1,5 +1,4 @@
-import React from 'react';
-import {useStore} from 'effector-react'
+import React, {useState} from 'react';
 
 import {
   NumberDecrementStepper,
@@ -13,7 +12,9 @@ import Stack from '@chakra-ui/core/dist/Stack';
 
 import {
   buyNextEvent,
-  mainButtonStateStore,
+  sellOffEvent,
+  startEvent,
+  stopEvent,
   stopLossEvent,
   takerCommissionEvent,
   takerUsdEvent,
@@ -21,7 +22,6 @@ import {
 } from '../../store';
 
 import styles from './styles.module.scss'
-
 
 const obj = [
   {
@@ -57,11 +57,11 @@ const obj = [
 ];
 
 const HomeInputGroup = () => {
+  const [ validate, setValidate ] = useState(false)
 
-  const stateMainButtons = useStore(mainButtonStateStore);
-
-  // console.log( 'stateMainButtons -> ', stateMainButtons );
-
+  startEvent.watch(() => setValidate(true));
+  stopEvent.watch(() => setValidate(false));
+  sellOffEvent.watch(() => setValidate(false));
 
   const changeInput = (e) => {
     switch (e.target.id) {
@@ -80,7 +80,6 @@ const HomeInputGroup = () => {
       case '5' : {
         return buyNextEvent(e.target.value);
       }
-
       default: {
         return e.target.value
       }
@@ -98,9 +97,7 @@ const HomeInputGroup = () => {
               </div>
               <div>
                 <NumberInput
-                  isDisabled={
-                    stateMainButtons.startButton
-                  }
+                  isDisabled={validate}
                   defaultValue={0}
                   size="sm"
                   min={item.minValue}
