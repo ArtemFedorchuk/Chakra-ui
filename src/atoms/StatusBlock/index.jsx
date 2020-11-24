@@ -12,8 +12,15 @@ const StatusBlock = () => {
     setStatus(true)
   });
 
-  stopEvent.watch(() => setStatus(false));
-  sellOffEvent.watch(() => setStatus(false));
+  stopEvent.watch(() => {
+    setShow(true);
+    setStatus(false)
+  });
+
+  sellOffEvent.watch(() => {
+    setShow(true);
+    setStatus(false)
+  });
   return (
     <>
       {show && (
