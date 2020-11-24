@@ -37,7 +37,6 @@ const SocketClient = () => {
         'status': false,
       });
     })
-
   },[])
 
   // BUTTON EXTRA STOP

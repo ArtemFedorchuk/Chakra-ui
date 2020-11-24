@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-
 import {
   NumberDecrementStepper,
   NumberIncrementStepper,
@@ -7,9 +6,7 @@ import {
   NumberInputField,
   NumberInputStepper
 } from '@chakra-ui/core';
-
 import Stack from '@chakra-ui/core/dist/Stack';
-
 import {
   buyNextEvent,
   sellOffEvent,

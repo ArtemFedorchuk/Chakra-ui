@@ -23,7 +23,7 @@ const ButtonGroup = () => {
       <Button
         onClick={() => startEvent(true)}
         isDisabled={disabled}
-        variantColor="blue"
+        variantColor="green"
         size="md"
         height="48px"
         width="200px"
@@ -31,7 +31,7 @@ const ButtonGroup = () => {
         leftIcon={ GiFlame }
         variant="outline"
         className={styles.btnStart}
-        _hover={{ bg: "rgba(0,0,0, .1)", color: "#63b3ed" }}
+        _hover={{ bg: "rgba(0,0,0, .1)", color: "#2F855A" }}
       >
         Start
       </Button>

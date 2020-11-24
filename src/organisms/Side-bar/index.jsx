@@ -8,7 +8,7 @@ import IconButton from '@chakra-ui/core/dist/IconButton';
 import { BsGraphUp, BsFillHouseFill, BsGearFill, BsLayoutSidebarReverse} from "react-icons/bs";
 
 import styles from './styles.module.scss'
-import Grid from '@chakra-ui/core/dist/Grid';
+import {StatusBlock} from '../../atoms';
 
 const SideBar = () => {
 
@@ -22,7 +22,7 @@ const SideBar = () => {
 
   return (
     <>
-      <Grid templateColumns="repeat(4, 1fr)" gap={1}>
+      <div className={styles.wrapperBox}>
         <Box w="5%" h="auto">
           <IconButton
             onClick={onOpen}
@@ -32,7 +32,10 @@ const SideBar = () => {
             size="lg"
           />
         </Box>
-      </Grid>
+        <Box w="95%">
+          <StatusBlock/>
+        </Box>
+      </div>
       <Drawer placement="right" bg="orange" onClose={onClose} isOpen={isOpen} >
         <DrawerOverlay />
         <DrawerContent bg="gray.800">
