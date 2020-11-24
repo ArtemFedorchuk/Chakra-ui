@@ -36,11 +36,12 @@ const LogIn = () => {
       localStorage.setItem('auth', 'true');
       setAuthValues({
         auth: true
-      })
+      });
 
       setTimeout(() => {
         history.push('/home');
       }, 1500)
+      setSendInfo(true)
     }
     else {
       setSendInfo(false)
