@@ -1,14 +1,37 @@
 import React, {useEffect} from 'react';
 import {io} from 'socket.io-client';
 import {useStore} from 'effector-react';
-import {inputValueStore, sellOffEvent, startEvent, stopEvent} from '../store';
+import {
+  inputValueStore,
+  sellOffEvent,
+  startEvent,
+  stopEvent,
+  // buyMessageEvent,
+  // sellMessageEvent,
+  // CounterEvent,
+  // MessagesStore,
+  // CountersStore,
+  // ProfitsStore,
+  CurrentPriceEvent,
+  SafetyEvent,
+  CurrentStopLossEvent,
+  NextBuyAtEvent,
+  ProfitsEvent
+} from '../store';
 
 const socket = io('http://localhost:3001');
 
 
 const SocketClient = () => {
   const inputStore = useStore(inputValueStore)
+  // const messageStore = useStore(MessagesStore)
+  // const counterStore = useStore(CountersStore)
+  // const profitStore = useStore(ProfitsStore)
+
   const {walletVolumeNumber,takerCommissionNumber,takerUsdNumber,stopLossNumber,buyNextNumber} = inputStore;
+
+  // console.log('messageStore => ', messageStore)
+  // console.log('profitStore => ', profitStore)
 
 //START BUTTON
   useEffect(() => {
@@ -44,41 +67,64 @@ const SocketClient = () => {
     sellOffEvent.watch(() => {
       console.log('EXTRA Stop...')
       socket.emit('binanceApp', {
-        'extraExit': true
+        'extraExit': true,
+        // 'extraPrice': document.querySelector('#currentPrice > span').innerHTML,
+        // 'extraTaker': document.getElementById('taker-value').value
       });
     })
   }, [])
 
 
   socket.on('binanceApp', (response) => {
-    console.log ('response => ', response)
+    // console.log ('response => ', response)
   if (response.action) {
     if (response.action === 'Buy') {
       // blockSellNowButton(false);
       // let buyElement = generateLiElement(response);
       // collection.appendChild(buyElement);
+      // buyMessageEvent(response)
     }
     else if (response.action === 'Sell') {
       // blockSellNowButton(true);
       // let sellElement = generateLiElement(response);
       // collection.appendChild(sellElement);
+      // sellMessageEvent(response)
       if (response.profit) {
-        // countProfits(response.profit);
+        ProfitsEvent(response.profit)
       }
     }
   }
   if (response.price && response.prevPrice) {
-    // changePriceOnMonitor(response);
+    // CurrentPriceEvent(response.price)
+    CurrentPriceEvent(response)
   }
   if (response.stopPrice || response.nextBuyAt) {
-    // changeStopLossOrNextBuyOnMonitor(response);
+    CurrentStopLossEvent(response.stopPrice);
+    NextBuyAtEvent(response.nextBuyAt)
   }
   if (response.safetyLine) {
-    // showSafetyLine(response.safetyLine);
+    SafetyEvent(response.safetyLine)
   } else {
-    // showSafetyLine(0);
+    SafetyEvent(0)
   }
 });
+
+  // function countProfits(profit) {
+  //   // let lossBox = document.getElementById('loss-orders-count');
+  //   // let profitBox = document.getElementById('profit-orders-count');
+  //   // let totalBox = document.getElementById('total-orders-count');
+  //   let currentProfit = Number(parseFloat(profit).toFixed(2));
+  //
+  //   if (currentProfit > 0) {
+  //     // profitBox.value = Number(parseFloat(profitBox.value).toFixed(2)) + currentProfit;
+  //     ProfitCounterEvent()
+  //   } else {
+  //     // lossBox.value = Number(parseFloat(lossBox.value).toFixed(2)) - currentProfit;
+  //     LossCounterEvent()
+  //   }
+  //   // totalBox.value = parseFloat(profitBox.value) - parseFloat(lossBox.value);
+  //   TotalCounterEvent()
+  // }
 
   return(
     <></>
@@ -95,50 +141,7 @@ export default SocketClient
 // let extraStopButton = document.getElementById('sell-now-button');
 // let collection = document.getElementById('collection');
 // let toolStatus = document.getElementById('status-value');
-//
-// // BUTTON START
-// startButton.addEventListener('click', (event) => {
-//   event.preventDefault();
-//   toolStatus.textContent = 'working...';
-//   toolStatus.classList.remove('red', 'lighten-2');
-//   toolStatus.classList.add('green', 'lighten-2');
-//   let takerCommission = document.getElementById('taker-value').value;
-//   let takerUsd = document.getElementById('taker-usd').value;
-//   let buyNext = document.getElementById('buy-next-percentage').value;
-//   let stopLoss = document.getElementById('stop-loss').value;
-//   let walletVolume = document.getElementById('wallet-volume').value;
-//   socket.emit('binanceApp', {
-//     'status': true,
-//     'taker': takerCommission,
-//     'walletVolume': parseFloat(walletVolume),
-//     'buyNext': parseFloat(buyNext),
-//     'takerUsd': parseFloat(takerUsd),
-//     'loss': parseFloat(stopLoss)
-//   });
-// });
-//
-// // BUTTON STOP
-// stopButton.addEventListener('click', (event) => {
-//   event.preventDefault();
-//   toolStatus.textContent = 'Stopped';
-//   toolStatus.classList.remove('green', 'lighten-2');
-//   toolStatus.classList.add('red', 'lighten-2');
-//   socket.emit('binanceApp', {
-//     'status': false,
-//   });
-//   return false;
-// });
-//
-// // BUTTON EXTRA STOP
-// extraStopButton.addEventListener('click', (event) => {
-//   event.preventDefault();
-//   showStop();
-//   socket.emit('binanceApp', {
-//     'extraExit': true
-//   });
-//   return false;
-// });
-//
+
 // // Add status STOP (styles)
 // function showStop() {
 //   toolStatus.textContent = 'Stopped';
@@ -146,43 +149,7 @@ export default SocketClient
 //   toolStatus.classList.add('red', 'lighten-2');
 //   return false;
 // }
-//
-//
-// socket.on('binanceApp', (response) => {
-//   if (response.action) {
-//     if (response.action === 'Buy') {
-//       blockSellNowButton(false);
-//       let buyElement = generateLiElement(response);
-//       collection.appendChild(buyElement);
-//     }
-//     else if (response.action === 'Sell') {
-//       blockSellNowButton(true);
-//       let sellElement = generateLiElement(response);
-//       collection.appendChild(sellElement);
-//       if (response.profit) {
-//         countProfits(response.profit);
-//       }
-//     }
-//   }
-//   if (response.price && response.prevPrice) {
-//     changePriceOnMonitor(response);
-//   }
-//   if (response.stopPrice || response.nextBuyAt) {
-//     changeStopLossOrNextBuyOnMonitor(response);
-//   }
-//   if (response.safetyLine) {
-//     showSafetyLine(response.safetyLine);
-//   } else {
-//     showSafetyLine(0);
-//   }
-// });
-//
-// // ADD data in Safety line value block
-// function showSafetyLine(safetyLine) {
-//   let safetyField = document.getElementById('safety-line');
-//   safetyField.innerHTML = safetyLine.toFixed(2);
-// }
-//
+
 // // Add disabled to button SELL NOW AND OFF
 // function blockSellNowButton(sell = true) {
 //   let sellNowButton = document.getElementById('sell-now-button');
@@ -227,31 +194,7 @@ export default SocketClient
 //   }
 // }
 //
-// // CURRENT PRICE block
-// function changePriceOnMonitor(response) {
-//   let currentPrice = document.getElementById('currentPrice');
-//   currentPrice.innerHTML = '';
-//   let arrow = document.createElement('i');
-//   let price = document.createElement('span');
-//   price.textContent = response.price
-//   arrow.classList.add('material-icons', 'left');
-//
-//   if (response.price > response.prevPrice) {
-//     arrow.classList.add('green', 'darken-2');
-//     arrow.textContent = 'arrow_upward';
-//     currentPrice.appendChild(arrow);
-//   } else if (response.price === response.prevPrice) {
-//     arrow.classList.add('lime', 'lighten-2');
-//     arrow.textContent = 'arrow_forward';
-//     currentPrice.appendChild(arrow);
-//   } else {
-//     arrow.classList.add('red', 'darken-2');
-//     arrow.textContent = 'arrow_downward';
-//     currentPrice.appendChild(arrow);
-//   }
-//   currentPrice.appendChild(price);
-// }
-//
+
 // // Block MESSAGES
 // function generateLiElement(data) {
 //   let element = document.createElement('li');
@@ -259,6 +202,7 @@ export default SocketClient
 //   let title = document.createElement('span');
 //   let info = document.createElement('p');
 //   let link = document.createElement('a');
+
 //   // Implement counter of operations
 //   let countLi = document.getElementById('collection').getElementsByTagName('li').length + 1;
 //   let countElement = document.createElement('span');
@@ -268,6 +212,7 @@ export default SocketClient
 //   icon.classList.add('material-icons', 'circle');
 //   title.classList.add('title');
 //   link.classList.add('secondary-content');
+
 //   if (data.action === 'Buy') {
 //     icon.classList.add('light-green', 'darken-2');
 //     info.textContent = 'Price: $' + parseFloat(data.buyPrice.toFixed(2));
@@ -275,6 +220,7 @@ export default SocketClient
 //     icon.classList.add('orange', 'darken-3');
 //     info.textContent = 'Profit: $' + parseFloat(data.profit.toFixed(2)) + ' | Sell price: $' + parseFloat(data.sellPrice.toFixed(2));
 //   }
+
 //   // Content for entities
 //   icon.textContent = 'attach_money';
 //   title.textContent = data.action;
