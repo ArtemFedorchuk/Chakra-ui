@@ -39,5 +39,7 @@ export {
   CurrentStopLossStore,
   CurrentStopLossEvent,
   NextBuyAtStore,
-  NextBuyAtEvent
+  NextBuyAtEvent,
+  currentPriceInpValueStore,
+  currentPriceInpValueEvent,
 } from './Currents'

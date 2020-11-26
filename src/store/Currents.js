@@ -5,6 +5,8 @@ export const SafetyEvent = createEvent();
 export const CurrentStopLossEvent = createEvent()
 export const NextBuyAtEvent = createEvent()
 
+export const currentPriceInpValueEvent = createEvent()
+
 export const CurrentPriceStore = createStore([])
   .on(CurrentPriceEvent, (store, currentPrice) => (currentPrice))
 
@@ -16,4 +18,7 @@ export const CurrentStopLossStore = createStore(0)
 
 export const NextBuyAtStore= createStore(0)
   .on(NextBuyAtEvent, (store, nextBuyAt) => (nextBuyAt))
+
+export const currentPriceInpValueStore= createStore(0)
+  .on(currentPriceInpValueEvent, (store, priceInputValue) => (priceInputValue))
 

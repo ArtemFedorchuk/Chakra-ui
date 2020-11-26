@@ -1,12 +1,19 @@
-import React, {useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {Stat, StatGroup, StatLabel, StatNumber} from '@chakra-ui/core';
 import {useStore} from 'effector-react';
-import {CurrentPriceStore, CurrentStopLossStore, NextBuyAtStore, SafetyStore} from '../../store';
+import {
+  currentPriceInpValueEvent,
+  CurrentPriceStore,
+  CurrentStopLossStore,
+  NextBuyAtStore,
+  SafetyStore
+} from '../../store';
 
 import styles from './styles.module.scss'
 
 
 const CurrentGroup = () => {
+  const inpRef = useRef(null);
   // eslint-disable-next-line no-unused-vars
   const [customBg, setCustomBg] = useState('')
   const currentPrice = useStore(CurrentPriceStore)
@@ -17,6 +24,12 @@ const CurrentGroup = () => {
   const safetyValueFloat = Number(parseFloat(safetyValue).toFixed(2))
   const currentStopLossFloat = currentStopLoss.toFixed(2);
   const nextBuyAtFloat = nextBuyAt.toFixed(2);
+
+  useEffect(() => {
+    const currentPriceInpValue = inpRef.current.value;
+
+    currentPriceInpValueEvent(currentPriceInpValue)
+  })
 
   // if (currentPrice.price > currentPrice.prevPrice) {
   //   setCustomBg('green')
@@ -33,7 +46,12 @@ const CurrentGroup = () => {
           <StatLabel>Current price</StatLabel>
           <StatNumber>
             <span>
-                {!currentPrice.price ? 0 : currentPrice.price}
+                <input
+                  ref={inpRef}
+                  disabled={true}
+                  value={!currentPrice.price ? 0 : currentPrice.price}
+                  className={styles.currentInput}
+                />
             </span>
           </StatNumber>
         </Stat>
