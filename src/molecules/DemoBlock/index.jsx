@@ -13,13 +13,13 @@ const DemoBlock = () => {
       <h1 className={styles.demoToolTitle}>Demo Tool</h1>
       <div className={styles.demoToolContent}>
         <p
-          className={demoToolStore === 'no' ? styles.offDemo : false}
+          className={!demoToolStore ? styles.offDemo : ''}
         >
           Off
         </p>
         <SwitchControl/>
         <p
-          className={demoToolStore === 'yes' ? styles.onDemo : false}
+          className={demoToolStore ? styles.onDemo : ''}
         >
           On
         </p>

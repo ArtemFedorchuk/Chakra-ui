@@ -4,17 +4,15 @@ import {DemoToolSwitchEvent} from '../../store';
 
 
 const SwitchControl = () => {
-  const [value, setValue] = useState('no');
+  const [value, setValue] = useState(false);
 
   DemoToolSwitchEvent(value)
-
-  console.log('value -> ',value)
 
   return (
     <>
       <Switch
-        on="yes"
-        off="no"
+        on={true}
+        off={false}
         value={value}
         onChange={setValue}
         styles={{

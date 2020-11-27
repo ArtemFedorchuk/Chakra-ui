@@ -13,7 +13,7 @@ import {
   CurrentStopLossEvent,
   NextBuyAtEvent,
   ProfitsEvent,
-  currentPriceInpValueStore,
+  currentPriceInpValueStore, currencyPairsStore, DemoToolSwitchStore,
 } from '../store';
 
 const socket = io('http://localhost:3001');
@@ -21,6 +21,8 @@ const socket = io('http://localhost:3001');
 const SocketClient = () => {
   const inputStore = useStore(inputValueStore);
   const currentPriceInpValue = useStore(currentPriceInpValueStore);
+  const currencyPairsValue = useStore(currencyPairsStore);
+  const demoToolSwitchValue = useStore(DemoToolSwitchStore);
 
   const {walletVolumeNumber,takerCommissionNumber,takerUsdNumber,stopLossNumber,buyNextNumber} = inputStore;
 
@@ -35,10 +37,20 @@ const SocketClient = () => {
         'walletVolume': parseFloat(walletVolumeNumber),
         'buyNext': parseFloat(buyNextNumber),
         'takerUsd': parseFloat(takerUsdNumber),
-        'loss': parseFloat(stopLossNumber)
+        'loss': parseFloat(stopLossNumber),
+        'currencyPair': currencyPairsValue,  //text currency pairs 'string'
+        'demoStatus': demoToolSwitchValue // status demo tool 'bool'
       });
     })
-  }, [takerCommissionNumber,walletVolumeNumber,buyNextNumber,takerUsdNumber,stopLossNumber])
+  }, [
+    takerCommissionNumber,
+    walletVolumeNumber,
+    buyNextNumber,
+    takerUsdNumber,
+    stopLossNumber,
+    currencyPairsValue,
+    demoToolSwitchValue
+  ])
 
   //STOP BUTTON
   useEffect(() => {
