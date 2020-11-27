@@ -1,0 +1,30 @@
+.demoToolWrapper {
+  width: 100%;
+  padding: 9px;
+  border: 1px solid #718096;
+  border-radius: 5px;
+  margin-bottom: 32px;
+
+  .demoToolTitle {
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .demoToolContent {
+    display: flex;
+    justify-content: center;
+    padding-top: 5px;
+    .offDemo {
+      color: #E53E3E;
+    }
+
+    .onDemo {
+      color: #38A169;
+    }
+    
+    p {
+      text-transform: uppercase;
+      padding: 0 10px ;
+    }
+  }
+}

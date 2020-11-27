@@ -1,27 +1,32 @@
 import React, {useState} from 'react';
 import Button from '@chakra-ui/core/dist/Button';
 import { GiFlame, GiInterdiction } from "react-icons/gi";
-import { sellOffEvent, startEvent, stopEvent } from '../../store';
+import { useStore } from 'effector-react';
+import {
+  currencyPairsStore,
+  sellOffEvent,
+  startEvent,
+  stopEvent
+} from '../../store';
 
 import styles from './styles.module.scss'
 
 const ButtonGroup = () => {
   const [ disabled, setDisabled ] = useState(false)
+  const currencyStore = useStore(currencyPairsStore);
 
   startEvent.watch(() => setDisabled(true));
   stopEvent.watch(() => setDisabled(false));
   sellOffEvent.watch(() => setDisabled(false));
 
-  // eslint-disable-next-line no-unused-vars
-  const getUser = () => {
-    const user = localStorage.getItem('user');
-    console.log( 'user -> ',user );
-  };
+  const handleClickStart = () => {
+    return !currencyStore ? false : startEvent(true)
+  }
 
   return (
     <div className={styles.buttonGroup}>
       <Button
-        onClick={() => startEvent(true)}
+        onClick={handleClickStart}
         isDisabled={disabled}
         variantColor="green"
         size="md"

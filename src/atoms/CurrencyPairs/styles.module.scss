@@ -1,0 +1,23 @@
+.wrapperCurrencyInput {
+  .currencyTitle {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    color: aliceblue;
+    margin-bottom: 10px;
+    font-size: 14px;
+    text-align: left;
+  }
+
+  .selectItem {
+    background: rgba(39,45,56, 1);
+    .currencyOption {
+      padding: 5px 0;
+    }
+  }
+
+  .errText {
+    font-size: 11px;
+    color: #E53E3E;
+    text-align: left;
+    padding: 2px 0;
+  }
+}

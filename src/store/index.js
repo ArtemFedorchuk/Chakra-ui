@@ -1,3 +1,4 @@
+
 export {
   inputValueStore,
   walletEvent,
@@ -43,3 +44,13 @@ export {
   currentPriceInpValueStore,
   currentPriceInpValueEvent,
 } from './Currents'
+
+export {
+  currencyPairsStore,
+  currencyPairsEvent
+} from './CurrencyPairs'
+
+export {
+  DemoToolSwitchStore,
+  DemoToolSwitchEvent
+} from './DemoToolSwitch'

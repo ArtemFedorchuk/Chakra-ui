@@ -1,6 +1,7 @@
 import React from 'react'
-
 import { SideBar, MessageBox } from '../../organisms/';
+import DemoBlock from '../../molecules/DemoBlock';
+import CurrencyPairs from '../../atoms/CurrencyPairs';
 
 import {
   Graph,
@@ -24,11 +25,17 @@ const HomeTemplate = () => {
             <CurrentGroup />
           </div>
           <div className={styles.inputGroupWrapper}>
+            <div className={styles.currencyPairsItem}>
+              <CurrencyPairs />
+            </div>
             <HomeInputGroup />
           </div>
           <ButtonGroup />
         </div>
         <div className={styles.rightContent}>
+          <div>
+            <DemoBlock/>
+          </div>
           <MessageBox />
         </div>
       </div>

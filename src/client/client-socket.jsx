@@ -94,22 +94,30 @@ const SocketClient = () => {
 
   function generateLiElement(data) {
     if (data.action === 'Buy') {
-      const buyObj = {
-        buy: true,
-        price: parseFloat(data.buyPrice.toFixed(2)),
-        time: new Date(data.time).toLocaleTimeString('en-US')
-      }
+      try {
+        const buyObj = {
+          buy: true,
+          price: parseFloat(data.buyPrice.toFixed(2)),
+          time: new Date(data.time).toLocaleTimeString('en-US')
+        }
 
-      buyMessageEvent(buyObj)
+        buyMessageEvent(buyObj)
+      }catch (error) {
+        console.log(error)
+      }
     } else if (data.action === 'Sell') {
-      const sellObj = {
-        sell: true,
-        profit: parseFloat(data.profit.toFixed(2)),
-        sellPrice: parseFloat(data.sellPrice.toFixed(2)),
-        time: new Date(data.time).toLocaleTimeString('en-US')
-      }
+      try {
+        const sellObj = {
+          sell: true,
+          profit: parseFloat(data.profit.toFixed(2)),
+          sellPrice: parseFloat(data.sellPrice.toFixed(2)),
+          time: new Date(data.time).toLocaleTimeString('en-US')
+        }
 
-      sellMessageEvent(sellObj)
+        sellMessageEvent(sellObj)
+      }catch (error) {
+        console.log(error)
+      }
     }
   }
 

@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Alert, AlertIcon} from '@chakra-ui/core';
-import {startEvent,stopEvent,sellOffEvent} from '../../store';
+import {startEvent, stopEvent, sellOffEvent} from '../../store';
 import CloseButton from '@chakra-ui/core/dist/CloseButton';
 
 const StatusBlock = () => {
@@ -21,6 +21,7 @@ const StatusBlock = () => {
     setShow(true);
     setStatus(false)
   });
+
   return (
     <>
       {show && (
