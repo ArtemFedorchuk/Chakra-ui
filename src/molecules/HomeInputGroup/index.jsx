@@ -8,7 +8,7 @@ import {
 } from '@chakra-ui/core';
 import Stack from '@chakra-ui/core/dist/Stack';
 import {
-  buyNextEvent,
+  buyNextEvent, DemoToolSwitchStore,
   sellOffEvent,
   startEvent,
   stopEvent,
@@ -19,42 +19,13 @@ import {
 } from '../../store';
 
 import styles from './styles.module.scss'
-
-const obj = [
-  {
-    id: 1,
-    label: 'Wallet volume in %',
-    defaultValue: '0',
-    minValue: '0'
-  },
-  {
-    id: 2,
-    label: 'Taker commission in %',
-    defaultValue: '0',
-    minValue: '0'
-  },
-  {
-    id: 3,
-    label: 'Taker USD for Safety zone',
-    defaultValue: '0',
-    minValue: '0'
-  },
-  {
-    id: 4,
-    label: 'Stop loss',
-    defaultValue: '0',
-    minValue: '0'
-  },
-  {
-    id: 5,
-    label: 'Buy next in percentage',
-    defaultValue: '0',
-    minValue: '0'
-  },
-];
+import {useStore} from 'effector-react';
 
 const HomeInputGroup = () => {
   const [ validate, setValidate ] = useState(false)
+  const demoToolStatus = useStore(DemoToolSwitchStore);
+
+  console.log('demoToolStatus -> ', demoToolStatus);
 
   startEvent.watch(() => setValidate(true));
   stopEvent.watch(() => setValidate(false));
@@ -83,9 +54,47 @@ const HomeInputGroup = () => {
     }
   };
 
+  const inputsArr = [
+    {
+      id: 1,
+      label: 'Wallet volume in %',
+      defaultValue: '0',
+      minValue: '0',
+      disable: demoToolStatus ? true : validate
+    },
+    {
+      id: 2,
+      label: 'Taker commission in %',
+      defaultValue: '0',
+      minValue: '0',
+      disable: validate
+    },
+    {
+      id: 3,
+      label: 'Taker USD for Safety zone',
+      defaultValue: '0',
+      minValue: '0',
+      disable: validate
+    },
+    {
+      id: 4,
+      label: 'Stop loss',
+      defaultValue: '0',
+      minValue: '0',
+      disable: validate
+    },
+    {
+      id: 5,
+      label: 'Buy next in percentage',
+      defaultValue: '0',
+      minValue: '0',
+      disable: validate
+    },
+  ];
+
   return (
       <Stack shouldWrapChildren direction="row">
-          {obj.map((item) => (
+          {inputsArr.map((item) => (
             <div key={item.id} className={styles.inputItem}>
               <div>
                 <h6>
@@ -94,7 +103,7 @@ const HomeInputGroup = () => {
               </div>
               <div>
                 <NumberInput
-                  isDisabled={validate}
+                  isDisabled={item.disable}
                   defaultValue={0}
                   size="sm"
                   min={item.minValue}
