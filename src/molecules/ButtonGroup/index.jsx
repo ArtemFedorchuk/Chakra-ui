@@ -57,7 +57,7 @@ const ButtonGroup = () => {
 
       <Button
         onClick={() => sellOffEvent(true)}
-        className={styles.buttonStop}
+        className={styles.buttonExtraStop}
         size="md"
         height="48px"
         width="200px"

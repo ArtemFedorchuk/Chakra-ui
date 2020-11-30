@@ -31,14 +31,6 @@ const CurrentGroup = () => {
     currentPriceInpValueEvent(currentPriceInpValue)
   })
 
-  // if (currentPrice.price > currentPrice.prevPrice) {
-  //   setCustomBg('green')
-  // } else if (currentPrice.price === currentPrice.prevPrice) {
-  //   setCustomBg('lime')
-  // } else {
-  //   setCustomBg('red')
-  // }
-
   return (
     <div className={styles.wrapperCounter}>
       <StatGroup>

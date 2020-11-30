@@ -4,4 +4,5 @@ export { default as HomeInputGroup } from './HomeInputGroup';
 export { default as CounterGroup } from './CounterGroup';
 export { default as CurrentGroup } from './CurrentGroup';
 export { default as SettingsInputsGroup } from './SettingsInputsGroup';
+export { default as SellProfitBlock } from './SellProfitBlock';
 

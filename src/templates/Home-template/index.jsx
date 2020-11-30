@@ -8,7 +8,8 @@ import {
   ButtonGroup,
   HomeInputGroup,
   CounterGroup,
-  CurrentGroup
+  CurrentGroup,
+  SellProfitBlock
 } from '../../molecules';
 
 import styles from './styles.module.scss'
@@ -30,7 +31,10 @@ const HomeTemplate = () => {
             </div>
             <HomeInputGroup />
           </div>
-          <ButtonGroup />
+          <div className={styles.bottomBlock}>
+            <ButtonGroup />
+            <SellProfitBlock />
+          </div>
         </div>
         <div className={styles.rightContent}>
           <div>

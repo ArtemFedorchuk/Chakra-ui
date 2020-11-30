@@ -25,8 +25,6 @@ const HomeInputGroup = () => {
   const [ validate, setValidate ] = useState(false)
   const demoToolStatus = useStore(DemoToolSwitchStore);
 
-  console.log('demoToolStatus -> ', demoToolStatus);
-
   startEvent.watch(() => setValidate(true));
   stopEvent.watch(() => setValidate(false));
   sellOffEvent.watch(() => setValidate(false));
