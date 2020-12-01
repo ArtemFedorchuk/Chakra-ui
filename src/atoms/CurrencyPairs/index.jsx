@@ -34,6 +34,7 @@ const CurrencyPairs = () => {
         className={styles.selectItem}
         onChange={handleSelect}
       >
+        <option value="BTC/USDT">BTC/USDT</option>
         <option value="BTC/BNB">BTC/BNB</option>
         <option value="BNB/USDT">BNB/USDT</option>
         <option value="ETH/BNB">ETH/BNB</option>
