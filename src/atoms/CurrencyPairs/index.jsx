@@ -34,12 +34,12 @@ const CurrencyPairs = () => {
         className={styles.selectItem}
         onChange={handleSelect}
       >
-        <option value="BTC/USDT">BTC/USDT</option>
-        <option value="BTC/BNB">BTC/BNB</option>
-        <option value="BNB/USDT">BNB/USDT</option>
-        <option value="ETH/BNB">ETH/BNB</option>
-        <option value="ETH/USDT">ETH/USDT</option>
-        <option value="ETH/BTC">ETH/BTC</option>
+        <option value="BTCUSDT">BTC/USDT</option>
+        <option value="BTCBNB">BTC/BNB</option>
+        <option value="BNBUSDT">BNB/USDT</option>
+        <option value="ETHBNB">ETH/BNB</option>
+        <option value="ETHUSDT">ETH/USDT</option>
+        <option value="ETHBTC">ETH/BTC</option>
       </Select>
       {!currencyStore && (
         <p className={styles.errText}>Add currency pairs!</p>
