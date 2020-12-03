@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
 import Text from '@chakra-ui/core/dist/Text';
@@ -12,13 +12,50 @@ import { HiAtSymbol } from "react-icons/hi";
 
 import {useAuthData} from '../../contexts/auth-context/authContext';
 import styles from './styles.module.scss';
+import * as axios from 'axios';
+import useToast from '@chakra-ui/core/dist/Toast';
 
 const LogIn = () => {
+  const toast = useToast()
+
   const { setAuthValues } = useAuthData()
   const [ login, setLogin ] = useState();
+  const [validateInputValue, setValidateInputValue] = useState(null)
   const [ password, setPassword ] = useState();
   const [show, setShow] = React.useState(false);
   const [sendInfo, setSendInfo ] = useState(false);
+
+  useEffect(() => {
+    let errors = {};
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+
+    if (!login) {
+      errors.email = "Email is required";
+    } else if (!regex.test(login)) {
+      errors.email = "Invalid Email";
+    }
+
+    if (!password) {
+      errors.password = "Password is required";
+    } else if (password.length < 6) {
+      errors.password = "Password too short";
+    }
+
+    if (Object.keys(errors).length === 0) {
+      setValidateInputValue(true)
+    }
+  }, [login, password])
+
+  const showToast = (title = 'title', description = 'description', status= 'success') => {
+    return toast({
+      position: "top-right",
+      title: title,
+      description: description,
+      status: status,
+      duration: 5000,
+      isClosable: true,
+    })
+  }
 
   const handleShow = () => setShow(!show);
   const history = useHistory();
@@ -32,19 +69,35 @@ const LogIn = () => {
   };
 
   const sendHandler = () => {
-    if( login === 'admin@.com' && password === 'admin123') {
-      localStorage.setItem('auth', 'true');
-      setAuthValues({
-        auth: true
-      });
+    if (validateInputValue) {
+      axios.post('http://localhost:3001/api/auth/login', {
+        email: `${login}`,
+        password: `${password}`
+      })
+        .then(function (response) {
+          console.log(response);
+          if (response.status === 200) {
+            console.log('token ', response.data.token)
+            document.cookie = `token=${response.data.token}`
+            localStorage.setItem('auth', 'true');
 
-      setTimeout(() => {
-        history.push('/home');
-      }, 1500)
-      setSendInfo(true)
+            setAuthValues({ auth: true });
+
+            setTimeout(() => {
+              history.push('/home');
+            }, 1500)
+            setSendInfo(true)
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+          showToast('Something went wrong!', '',"error")
+          setSendInfo(false)
+        });
     }
     else {
-      setSendInfo(false)
+      showToast('Invalid Email or Password', 'We need add correct data!',"warning")
+      setValidateInputValue(true)
     }
   };
 
@@ -63,6 +116,7 @@ const LogIn = () => {
               children={<HiAtSymbol color="gray.300"/>}
             />
             <Input
+              isInvalid={validateInputValue}
               type="phone"
               placeholder="Email"
               onChange={loginHandler}
@@ -72,6 +126,7 @@ const LogIn = () => {
 
           <InputGroup size="md">
             <Input
+              isInvalid={validateInputValue}
               className={styles.input}
               pr="4.5rem"
               type={show ? 'text' : 'password'}

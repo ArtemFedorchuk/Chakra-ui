@@ -6,6 +6,7 @@
     "@emotion/core": "^10.0.35",
     "@emotion/styled": "^10.0.27",
     "apexcharts": "^3.22.2",
+    "axios": "^0.21.0",
     "chart.js": "^2.9.4",
     "effector-react": "^21.0.8",
     "emotion-theming": "^10.0.27",
