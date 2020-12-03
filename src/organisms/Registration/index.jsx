@@ -13,10 +13,23 @@ import styles from './styles.module.scss';
 import Text from '@chakra-ui/core/dist/Text';
 
 const Registration = () => {
+  const [ email, setEmail ] = useState();
+  const [ password, setPassword ] = useState();
   const [show, setShow] = React.useState(false);
   const [sendInfo, setSendInfo ] = useState(false);
 
   const handleShow = () => setShow(!show);
+
+  // console.log(email);
+  // console.log(password);
+
+  const emailHandler = (e) => {
+    setEmail(e.target.value)
+  };
+
+  const passwordHandler = (e) => {
+    setPassword(e.target.value)
+  };
 
   const sendHandler = () => {
     setSendInfo(true)
@@ -40,6 +53,7 @@ const Registration = () => {
                 type="email"
                 placeholder="Email"
                 focusBorderColor="#2C7A7B"
+                onChange={emailHandler}
               />
             </InputGroup>
 
@@ -50,6 +64,7 @@ const Registration = () => {
                 type={show ? "text" : "password"}
                 placeholder="Enter password"
                 focusBorderColor="#2C7A7B"
+                onChange={passwordHandler}
               />
               <InputRightElement width="4.5rem">
                 <Button
